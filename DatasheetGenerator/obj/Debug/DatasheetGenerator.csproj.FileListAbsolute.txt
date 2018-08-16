@@ -1,0 +1,15 @@
+C:\Users\CLEIT\Desktop\sourceControl\App\DatasheetGenerator\bin\Debug\DatasheetGenerator.exe.config
+C:\Users\CLEIT\Desktop\sourceControl\App\DatasheetGenerator\bin\Debug\DatasheetGenerator.exe
+C:\Users\CLEIT\Desktop\sourceControl\App\DatasheetGenerator\bin\Debug\DatasheetGenerator.pdb
+C:\Users\CLEIT\Desktop\sourceControl\App\DatasheetGenerator\obj\Debug\DatasheetGenerator.csprojAssemblyReference.cache
+C:\Users\CLEIT\Desktop\sourceControl\App\DatasheetGenerator\obj\Debug\MainWindow.g.cs
+C:\Users\CLEIT\Desktop\sourceControl\App\DatasheetGenerator\obj\Debug\App.g.cs
+C:\Users\CLEIT\Desktop\sourceControl\App\DatasheetGenerator\obj\Debug\DatasheetGenerator_MarkupCompile.cache
+C:\Users\CLEIT\Desktop\sourceControl\App\DatasheetGenerator\obj\Debug\DatasheetGenerator_MarkupCompile.lref
+C:\Users\CLEIT\Desktop\sourceControl\App\DatasheetGenerator\obj\Debug\MainWindow.baml
+C:\Users\CLEIT\Desktop\sourceControl\App\DatasheetGenerator\obj\Debug\DatasheetGenerator.g.resources
+C:\Users\CLEIT\Desktop\sourceControl\App\DatasheetGenerator\obj\Debug\DatasheetGenerator.Properties.Resources.resources
+C:\Users\CLEIT\Desktop\sourceControl\App\DatasheetGenerator\obj\Debug\DatasheetGenerator.csproj.GenerateResource.cache
+C:\Users\CLEIT\Desktop\sourceControl\App\DatasheetGenerator\obj\Debug\DatasheetGenerator.csproj.CoreCompileInputs.cache
+C:\Users\CLEIT\Desktop\sourceControl\App\DatasheetGenerator\obj\Debug\DatasheetGenerator.exe
+C:\Users\CLEIT\Desktop\sourceControl\App\DatasheetGenerator\obj\Debug\DatasheetGenerator.pdb

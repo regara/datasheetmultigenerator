@@ -1,0 +1,20 @@
+﻿<Window x:Class="DatasheetGenerator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DatasheetGenerator"
+        mc:Ignorable="d"
+        Title="Datasheet Generator" Height="780" Width="1026">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+        <Grid>
+            <TextBox Foreground="Firebrick" Name="ErrorBanner" BorderThickness="0,0,0,0" IsReadOnly="True"  TextWrapping="Wrap" Margin="282,10,277,687"/>
+            <Button Name="Upload" Content="Upload File" Click="UploadXMLClicked" HorizontalAlignment="Left" Margin="242,67,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.96,-0.6"/>
+            <Button Content="Generate Datasheet" Click="GenerateDatasheet" HorizontalAlignment="Left" Margin="666,67,0,0" VerticalAlignment="Top" Width="125"/>
+            <Button IsEnabled="False" Content="Delete Last" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="466,67,0,0"/>
+
+            <StackPanel Orientation="Horizontal" Name="Container">
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
+</Window>
