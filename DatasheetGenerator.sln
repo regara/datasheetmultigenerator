@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatasheetGenerator", "DatasheetGenerator\DatasheetGenerator.csproj", "{CE9478FB-1365-4468-99C4-BB63158F6E00}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatasheetGenerator", "DatasheetGenerator\DatasheetGenerator.csproj", "{0ECEB191-2257-4D4E-952E-E38B08F117BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CE9478FB-1365-4468-99C4-BB63158F6E00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CE9478FB-1365-4468-99C4-BB63158F6E00}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CE9478FB-1365-4468-99C4-BB63158F6E00}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CE9478FB-1365-4468-99C4-BB63158F6E00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0ECEB191-2257-4D4E-952E-E38B08F117BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0ECEB191-2257-4D4E-952E-E38B08F117BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0ECEB191-2257-4D4E-952E-E38B08F117BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0ECEB191-2257-4D4E-952E-E38B08F117BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {CBCF2DBE-B050-4CAD-86A9-AB0E7008BC83}
+		SolutionGuid = {9A1E4D88-05D0-47C1-B4A1-A5F0F6256905}
 	EndGlobalSection
 EndGlobal

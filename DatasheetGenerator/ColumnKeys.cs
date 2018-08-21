@@ -1,119 +1,13 @@
-﻿using System;
-using System.Windows;
-using System.Xml.Linq;
-using Microsoft.Win32;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace DatasheetGenerator
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-
-
-    public class DatasheetBuilder
+    public class ColumnKeys
     {
-
-        
-
-        //////////////////////////  1-10 && 15 dimensions for the Main content widths   //////////////////////////
-
-        // COLUMNS
-        public static int[] colWdithArr =
-        {
-            1669,
-            1500,
-            1154,
-            938,
-            749,
-            624,
-            536,
-            469,
-            430,
-            327,
-            293
-        };
-
-        // COLUMN - <TBLPR>
-        public static int[] pageWidthArr =
-        {
-            2729,
-            3898,
-            5068,
-            6238,
-            6245,
-            6245,
-            6245,
-            6245,
-            6245,
-            6498,
-            4811
-        };
-
-        // COLUMNS
-        public static int[] keyWidthArr =
-        {
-            3331,
-            1997,
-            1536,
-            1248,
-            1247,
-            1246,
-            1245,
-            1246,
-            1125,
-            1082,
-            577
-        };
-
-
-
-        //////////////////////////  New Cell Template   /////////////////////////
-
-        public string cellBuilder(string Value)
-        {
-            return @"<w:tc>
-                    <w:tcPr>
-                        <w:tcW w:w='keyWidthPH' w:type='pct'/>
-                        <w:vAlign w:val='bottom'/>
-                    </w:tcPr>
-                    <w:p>
-                        <w:pPr>
-                            <w:pStyle w:val='Heading2'/>
-                            <w:rPr>
-                                <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
-                                <w:noProof/>
-                                <w:sz w:val='20'/>
-                                <w:u w:val='none'/>
-                            </w:rPr>
-                        </w:pPr>
-                        <w:r>
-                            <w:rPr>
-                                <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
-                                <w:noProof/>
-                                <w:sz w:val='20'/>
-                                <w:u w:val='none'/>
-                            </w:rPr>
-                            <w:t>" + Value + @"</w:t>
-                        </w:r>
-                    </w:p>
-                </w:tc>";
-        }
-
-            
-
-
-
-
         //////////////////////////  Starting Values (key and setup data)   /////////////////////////
+        public List<string> mainContentKeysArr { get; set; }
 
-
-
-
-
-
-
-        public static string PHOTO = @"<w:tr w:rsidR='00C834F9' w:rsidTr='00FC375E'>
+        public string PHOTO = @"<w:tr w:rsidR='00C834F9' w:rsidTr='00FC375E'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -143,7 +37,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string HERS = @"<w:tr w:rsidR='00C834F9' w:rsidTr='00FC375E'>
+        public string HERS = @"<w:tr w:rsidR='00C834F9' w:rsidTr='00FC375E'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -173,7 +67,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string PLANNAME = @"<w:tr w:rsidR='00282263' w:rsidTr='00FC375E'>
+        public string PLANNAME = @"<w:tr w:rsidR='00282263' w:rsidTr='00FC375E'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -206,7 +100,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string FILENAME = @"<w:tr w:rsidR='00282263' w:rsidTr='00FC375E'>
+        public string FILENAME = @"<w:tr w:rsidR='00282263' w:rsidTr='00FC375E'>
                 <w:trPr>
                     <w:trHeight w:val='144'/>
                 </w:trPr>
@@ -239,7 +133,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string SQFT = @"<w:tr w:rsidR='00282263' w:rsidTr='00FC375E'>
+        public string SQFT = @"<w:tr w:rsidR='00282263' w:rsidTr='00FC375E'>
                 <w:trPr>
                     <w:trHeight w:val='144'/>
                 </w:trPr>
@@ -271,7 +165,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string ABVP = @"<w:tr w:rsidR='00282263' w:rsidTr='00FC375E'>
+        public string ABVP = @"<w:tr w:rsidR='00282263' w:rsidTr='00FC375E'>
                 <w:trPr>
                     <w:trHeight w:val='144'/>
                 </w:trPr>
@@ -301,7 +195,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string COOLP = @"<w:tr w:rsidR='00282263' w:rsidTr='00FC375E'>
+        public string COOLP = @"<w:tr w:rsidR='00282263' w:rsidTr='00FC375E'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -333,7 +227,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string STORIES = @"<w:tr w:rsidR='00282263' w:rsidTr='00FC375E'>
+        public string STORIES = @"<w:tr w:rsidR='00282263' w:rsidTr='00FC375E'>
                 <w:trPr>
                     <w:trHeight w:val='144'/>
                 </w:trPr>
@@ -365,7 +259,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string GLAZINGP = @"<w:tr w:rsidR='00282263' w:rsidTr='00FC375E'>
+        public string GLAZINGP = @"<w:tr w:rsidR='00282263' w:rsidTr='00FC375E'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -400,7 +294,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string ROOFMAT = @"<w:tr w:rsidR='00467C0D' w:rsidTr='00FC375E'>
+        public string ROOFMAT = @"<w:tr w:rsidR='00467C0D' w:rsidTr='00FC375E'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -470,7 +364,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string REFEM = @"<w:tr w:rsidR='00467C0D' w:rsidTr='00901116'>
+        public string REFEM = @"<w:tr w:rsidR='00467C0D' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -506,7 +400,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string ATTIC = @"<w:tr w:rsidR='00467C0D' w:rsidTr='00901116'>
+        public string ATTIC = @"<w:tr w:rsidR='00467C0D' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -532,7 +426,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string ABVRD = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string ABVRD = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -558,7 +452,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string BLWRD = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string BLWRD = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -584,7 +478,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string RADIENT = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string RADIENT = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -614,7 +508,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string WALL24 = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string WALL24 = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -640,7 +534,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string WALL26 = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string WALL26 = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -666,7 +560,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string KNEEWALL = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string KNEEWALL = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -692,7 +586,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string OVERG = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string OVERG = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -718,7 +612,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string FLOORTYPE = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string FLOORTYPE = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -747,7 +641,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string SEEREER = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string SEEREER = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='70'/>
                 </w:trPr>
@@ -810,7 +704,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string AFUE = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string AFUE = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -836,7 +730,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string DUCTINS = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string DUCTINS = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -862,7 +756,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string WHF = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string WHF = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -893,7 +787,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string FANWAT = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string FANWAT = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='99'/>
                 </w:trPr>
@@ -975,7 +869,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string AIRFLOW = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string AIRFLOW = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='99'/>
                 </w:trPr>
@@ -1004,7 +898,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string DUCTTEST = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string DUCTTEST = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='90'/>
                 </w:trPr>
@@ -1033,7 +927,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string CFM = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string CFM = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -1065,7 +959,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string REFCHARGE = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string REFCHARGE = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -1094,7 +988,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string SEERVERIF = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string SEERVERIF = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -1123,7 +1017,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string EERVERIF = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string EERVERIF = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -1152,7 +1046,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string INFILTRATION = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string INFILTRATION = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='99'/>
                 </w:trPr>
@@ -1181,7 +1075,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string DUCTCOND = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string DUCTCOND = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='99'/>
                 </w:trPr>
@@ -1210,7 +1104,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string LOWLEAK = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string LOWLEAK = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -1239,7 +1133,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string BURRIEDDUCT = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string BURRIEDDUCT = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='162'/>
                 </w:trPr>
@@ -1268,7 +1162,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string SURFAREA = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string SURFAREA = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -1297,7 +1191,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string INSULINSPECT = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string INSULINSPECT = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='125'/>
                 </w:trPr>
@@ -1392,7 +1286,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string FUELTYPE = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string FUELTYPE = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='144'/>
                 </w:trPr>
@@ -1421,7 +1315,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string UEF = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
+        public string UEF = @"<w:tr w:rsidR='00A36229' w:rsidTr='00901116'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -1447,7 +1341,7 @@ namespace DatasheetGenerator
                         </w:r>
                     </w:p>
                 </w:tc>";
-        public static string DISTRIBUTION = @"<w:tr w:rsidR='00A36229' w:rsidTr='00FC375E'>
+        public string DISTRIBUTION = @"<w:tr w:rsidR='00A36229' w:rsidTr='00FC375E'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
@@ -1480,41 +1374,20 @@ namespace DatasheetGenerator
 
 
 
-
+        public ColumnKeys()
+        {
+            mainContentKeysArr = new List<string>
+            {
+                PHOTO, HERS, PLANNAME, FILENAME, SQFT, ABVP, COOLP, STORIES, GLAZINGP, ROOFMAT, REFEM, ATTIC, ABVRD, BLWRD,
+                RADIENT, WALL24, WALL26, KNEEWALL, OVERG, FLOORTYPE, SEEREER, AFUE,
+                DUCTINS, WHF, FANWAT, AIRFLOW, DUCTTEST, CFM, REFCHARGE, SEERVERIF, EERVERIF, INFILTRATION, DUCTCOND,
+                LOWLEAK, BURRIEDDUCT, SURFAREA, INSULINSPECT, FUELTYPE, UEF, DISTRIBUTION
+            };
+        }
 
 
         //////////////////////////  prepares starting values to be entered in the method   //////////////////////////
 
-        public string[] mainContentKeysArr =
-        {
-            PHOTO, HERS, PLANNAME, FILENAME, SQFT, ABVP, COOLP, STORIES, GLAZINGP, ROOFMAT, REFEM, ATTIC, ABVRD, BLWRD,
-            RADIENT, WALL24, WALL26, KNEEWALL, OVERG, FLOORTYPE, SEEREER, AFUE,
-            DUCTINS, WHF, FANWAT, AIRFLOW, DUCTTEST, CFM, REFCHARGE, SEERVERIF, EERVERIF, INFILTRATION, DUCTCOND,
-            LOWLEAK, BURRIEDDUCT, SURFAREA, INSULINSPECT, FUELTYPE, UEF, DISTRIBUTION
-        };
-
-
-
-
-
         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 }

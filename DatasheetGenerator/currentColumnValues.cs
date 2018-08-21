@@ -2,33 +2,29 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Windows.Documents;
-using System.Xml;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
 namespace DatasheetGenerator
 {
-    public class currentColumnPushToALLVALUES
+    public class CurrentColumnValues
     {
+        //Array stores each value
+        public List<string> currentColumnValuesArr { get; set; }
 
-        public static string TODAYDATE { get; set; }
-        public static string SOFTVERSION { get; set; }
-        public static string PROJECTNAME { get; set; }
-        public static string CITY { get; set; }
-        public static string CLIMATEZONE { get; set; }
+        //Header fields
         public static string WALLTYPE { get; set; }
 
-
-        public static string PHOTO { get; set; }
-        public static string HERS { get; set; }
+        //Main fields
+        public static string PHOTO { get; set; } = "N/A";
+        public static string HERS { get; set; } = "N/A";
         public static string PLANNAME { get; set; }
         public static string FILENAME { get; set; }
         public static string SQFT { get; set; }
-        public static string ABVP { get; set; }
-        public static string COOLP { get; set; }
+        public static string ABVP { get; set; } = "%";
+        public static string COOLP { get; set; } = "%";
         public static string STORIES { get; set; }
-        public static string GLAZINGP { get; set; }
+        public static string GLAZINGP { get; set; } = "%";
         public static string ROOFMAT { get; set; }
         public static string REFEM { get; set; }
         public static string ATTIC { get; set; }
@@ -45,7 +41,7 @@ namespace DatasheetGenerator
         public static string DUCTINS { get; set; }
         public static string WHF { get; set; }
         public static string FANWAT { get; set; }
-        public static string AIRFLOW { get; set; }
+        public static string AIRFLOW { get; set; } = "airflow";
         public static string DUCTTEST { get; set; }
         public static string CFM { get; set; }
         public static string REFCHARGE { get; set; }
@@ -62,6 +58,7 @@ namespace DatasheetGenerator
         public static string DISTRIBUTION { get; set; }
 
 
+        // Skylight
         public static List<string> windowsUV { get; set; } = new List<string>();
         public static List<string> windowsSHGC { get; set; } = new List<string>();
         public static List<string> windowTypes { get; set; } = new List<string>();
@@ -69,10 +66,6 @@ namespace DatasheetGenerator
         public static List<string> skyLTUV { get; set; } = new List<string>();
         public static List<string> skyLTSHGC { get; set; } = new List<string>();
         public static List<string> skyLTTypes { get; set; } = new List<string>();
-
-
-
-
 
         // TEMPORARY WINDOW STUFF
 
@@ -96,9 +89,9 @@ namespace DatasheetGenerator
         public static string SHGC { get; set; }
 
 
-        //Sets the values for the current column
-        public currentColumnPushToALLVALUES(XDocument doc)
+        public CurrentColumnValues(XDocument doc)
         {
+
             /*********************** DRY PATH METHOD ***********************/
 
             string DryPath(IEnumerable<XElement> path, XName element)
@@ -119,18 +112,12 @@ namespace DatasheetGenerator
 
             /*********************** Misc General Data ***********************/
             var skyLightExists = doc.XPathSelectElement("//Skylt") != null;
-
-            string[] _softversionTemp = Convert.ToString(userInput.Elements("SoftwareVersion").First().Value).Split(' ')[1].Split('.');
-            string _softversion = "CBECC V" + _softversionTemp[1] + "." + _softversionTemp[2];
-
             string _name = DryPath(userInput, "Name");
-            string _city = DryPath(userInput, "City");
-            if (_city.Split(' ').Last() != "CA" && !_city.Split(' ').Last().Contains(",CA"))
-            {
-                _city += ", CA";
-            }
 
-            string _climateZone = DryPath(userInput, "ClimateZone").Split(' ')[0].Split('Z')[1];
+
+
+
+
             //            string _aboveCodePerc =  DryPath(standard.Elements("EUseSummary"), "PctSavingsCmpTDV");
             string _aboveCodePerc = standard.Elements("EUseSummary").Elements("PctSavingsCmpTDV").FirstOrDefault()?.Value;
             string _spaceCool = Math.Round(Convert.ToDouble(standard.Elements("EnergyUse").SingleOrDefault(x => x.Element("Name").Value == "EU-SpcClg")?.Elements("PctImproveTDV").SingleOrDefault().Value), 1) + "%";
@@ -409,7 +396,7 @@ namespace DatasheetGenerator
 
                     foreach (var windows in walls.Elements("Win"))
                     {
-                        
+
 
 
                         if (!windowsUV.Contains(windows.Element("NFRCUfactor")?.Value) ||
@@ -432,7 +419,7 @@ namespace DatasheetGenerator
                 skyLTTypes.Add(userInput.Descendants("Skylt").FirstOrDefault().Element("NFRCSHGC").Value);
             }
 
-                
+
 
             /*********************** PLACEHOLDER ***********************/
 
@@ -491,13 +478,8 @@ namespace DatasheetGenerator
                             }).SingleOrDefault();
 
             List<string> result = Convert.ToString(property).Split(',').ToList();
-     
 
-            TODAYDATE = DateTime.Now.ToString("MM/dd/yyyy");
-            SOFTVERSION = _softversion;
-            PROJECTNAME = _name + " ";
-            CITY = " " + _city;
-            CLIMATEZONE = _climateZone;
+
             WALLTYPE = _sidingOrStucco;
 
 
@@ -545,45 +527,42 @@ namespace DatasheetGenerator
 
 
 
-                        WIN1 = (windowTypes.ElementAtOrDefault(0) != null) ? windowTypes[0] : "";
-                        WIN2 = (windowTypes.ElementAtOrDefault(1) != null) ? windowTypes[1] : "";
-                        WIN3 = (windowTypes.ElementAtOrDefault(2) != null) ? windowTypes[2] : "";
-                        WIN4 = (windowTypes.ElementAtOrDefault(3) != null) ? windowTypes[3] : "";
+            WIN1 = (windowTypes.ElementAtOrDefault(0) != null) ? windowTypes[0] : "";
+            WIN2 = (windowTypes.ElementAtOrDefault(1) != null) ? windowTypes[1] : "";
+            WIN3 = (windowTypes.ElementAtOrDefault(2) != null) ? windowTypes[2] : "";
+            WIN4 = (windowTypes.ElementAtOrDefault(3) != null) ? windowTypes[3] : "";
 
 
-                        UVAL1 = (windowsUV.ElementAtOrDefault(0) != null) ? windowsUV[0] : "";
-                        UVAL2 = (windowsUV.ElementAtOrDefault(1) != null) ? windowsUV[1] : "";
-                        UVAL3 = (windowsUV.ElementAtOrDefault(2) != null) ? windowsUV[2] : "";
-                        UVAL4 = (windowsUV.ElementAtOrDefault(3) != null) ? windowsUV[3] : "";
-            
-            
-                        SHGC1 = (windowsSHGC.ElementAtOrDefault(0) != null) ? windowsSHGC[0] : "";
-                        SHGC2 = (windowsSHGC.ElementAtOrDefault(1) != null) ? windowsSHGC[1] : "";
-                        SHGC3 = (windowsSHGC.ElementAtOrDefault(2) != null) ? windowsSHGC[2] : "";
-                        SHGC4 = (windowsSHGC.ElementAtOrDefault(3) != null) ? windowsSHGC[3] : "";
-            
-            
-                        SKYLT = (skyLightExists) ? "Skylight" : "";
-                        UVAL = (skyLightExists) ? userInput.Descendants("Skylt").FirstOrDefault().Element("NFRCUfactor").Value : "";
-                        SHGC = (skyLightExists) ? userInput.Descendants("Skylt").FirstOrDefault().Element("NFRCSHGC").Value : "";
-        }
+            UVAL1 = (windowsUV.ElementAtOrDefault(0) != null) ? windowsUV[0] : "";
+            UVAL2 = (windowsUV.ElementAtOrDefault(1) != null) ? windowsUV[1] : "";
+            UVAL3 = (windowsUV.ElementAtOrDefault(2) != null) ? windowsUV[2] : "";
+            UVAL4 = (windowsUV.ElementAtOrDefault(3) != null) ? windowsUV[3] : "";
 
-        public List<string> currentColumnValuesArr()
-        {
-            return new List<string>
-            {
+
+            SHGC1 = (windowsSHGC.ElementAtOrDefault(0) != null) ? windowsSHGC[0] : "";
+            SHGC2 = (windowsSHGC.ElementAtOrDefault(1) != null) ? windowsSHGC[1] : "";
+            SHGC3 = (windowsSHGC.ElementAtOrDefault(2) != null) ? windowsSHGC[2] : "";
+            SHGC4 = (windowsSHGC.ElementAtOrDefault(3) != null) ? windowsSHGC[3] : "";
+
+
+            SKYLT = (skyLightExists) ? "Skylight" : "";
+            UVAL = (skyLightExists) ? userInput.Descendants("Skylt").FirstOrDefault().Element("NFRCUfactor").Value : "";
+            SHGC = (skyLightExists) ? userInput.Descendants("Skylt").FirstOrDefault().Element("NFRCSHGC").Value : "";
+
+
+
+
+
+
+
+
+            currentColumnValuesArr = new List<string> {
                 PHOTO, HERS, PLANNAME, FILENAME, SQFT, ABVP, COOLP, STORIES, GLAZINGP, ROOFMAT, REFEM, ATTIC, ABVRD, BLWRD,
                 RADIENT, WALL24, WALL26, KNEEWALL, OVERG, FLOORTYPE, SEEREER, AFUE,
                 DUCTINS, WHF, FANWAT, AIRFLOW, DUCTTEST, CFM, REFCHARGE, SEERVERIF, EERVERIF, INFILTRATION, DUCTCOND,
                 LOWLEAK, BURRIEDDUCT, SURFAREA, INSULINSPECT, FUELTYPE, UEF, DISTRIBUTION
             };
         }
-
-
-
-
         
-
-
     }
 }
