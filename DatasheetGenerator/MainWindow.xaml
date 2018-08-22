@@ -5,16 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DatasheetGenerator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="780" Width="1026">
+        Title="MainWindow" Height="850" Width="1500">
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
         <Grid>
-            <TextBox Foreground="Firebrick" Name="ErrorBanner" BorderThickness="0,0,0,0" IsReadOnly="True"  TextWrapping="Wrap" Margin="282,10,277,687"/>
-            <Button Name="Upload" Content="Upload File" Click="UploadXMLClicked" HorizontalAlignment="Left" Margin="242,67,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.96,-0.6"/>
-            <Button Content="Generate Datasheet" Click="GenerateDatasheet" HorizontalAlignment="Left" Margin="666,67,0,0" VerticalAlignment="Top" Width="125"/>
-            <Button IsEnabled="False" Content="Delete Last" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Margin="466,67,0,0"/>
+            <TextBox Foreground="Firebrick" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Name="ErrorBanner" BorderThickness="0,0,0,0" IsReadOnly="True"  TextWrapping="Wrap" Margin="252,0,307,756"/>
 
-            <StackPanel Orientation="Horizontal" Name="Container">
+            <Label Content="Commands" Width="160" Margin="1183,26,101,719" HorizontalContentAlignment="Center" BorderBrush="DeepSkyBlue" BorderThickness="3" />
+            <Label Content="Right Click - Delete Option" Width="160" Margin="1186,46,98,719"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 60 0 0">
+                <Button Name="Upload" Content="Upload File" Click="UploadXMLClicked" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.96,-0.6"/>
+                <Button IsEnabled="False" Content="Delete Last" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100 0 100 0" Width="75"/>
+                <Button Content="Generate Datasheet" Click="GenerateDatasheet" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="125"/>
             </StackPanel>
+
+            <!-- <TextBox Grid.Column="1" Grid.Row="0" Margin="3" /> -->
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Name="Container" x:FieldModifier="public" MouseDown="DeleteColumnPrompt">
+
+            </StackPanel>
+
+            
+            
+
         </Grid>
     </ScrollViewer>
 </Window>

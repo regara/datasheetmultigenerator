@@ -1,5 +1,4 @@
-Delete After/
 DatasheetGenerator/obj/
 DatasheetGenerator/Release/
 DatasheetGenerator/bin/
-DatasheetGenerator/.vs/
+.vs/

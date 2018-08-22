@@ -1,4 +1,6 @@
-﻿using System.Xml.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Xml.Linq;
 using Microsoft.Win32;
 
 namespace DatasheetGenerator
@@ -9,7 +11,7 @@ namespace DatasheetGenerator
 
     public class UploadXML
     {
-        public XDocument doc { get; set; }
+        public List<XDocument> doc { get; set; } = new List<XDocument>();
 
         public UploadXML()
         {
@@ -26,10 +28,13 @@ namespace DatasheetGenerator
 
             if (result != true)
                 return;
+           
 
-            string filename = cbeccxml.FileName;
+            foreach (string filename in cbeccxml.FileNames)
+            {
 
-            doc = XDocument.Load(filename);
+                doc.Add(XDocument.Load(filename));
+            }
         }
     }
 }
