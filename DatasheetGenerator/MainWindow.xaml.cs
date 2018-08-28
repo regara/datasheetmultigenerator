@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using MessageBox = System.Windows.MessageBox;
@@ -114,6 +113,7 @@ namespace DatasheetGenerator
                     ErrorBanner.Text = "Limit reached (10) - Will increase to 15 in the future";
 
                     Upload.IsEnabled = false;
+
                     break;
                 }
             }
@@ -130,12 +130,39 @@ namespace DatasheetGenerator
 
 
             var MainContent = new CellBuilder(allColumnsArr).MainContentCellsToString;
-            var Windows = new WindowBuilder().Windows;
+            var Windows = new WindowBuilder(CurrentColumnValues.windowArray).windowBuild;
 
+            Console.WriteLine("Window Initialized");
 
             try
             {
                 documentBuilder = new DocumentBuilder(Header, MainContent, Windows).fullXML;
+
+                Console.WriteLine("Document Built");
+
+
+
+
+                string path = @"C:\Users\CLEIT\Downloads\output.xml";
+
+                if (!File.Exists(path))
+                {
+                    File.Create(path).Dispose();
+
+                    using (TextWriter tw = new StreamWriter(path))
+                    {
+                        tw.WriteLine(documentBuilder);
+                    }
+
+                }
+
+
+
+
+
+
+
+
             }
             catch (Exception exception)
             {

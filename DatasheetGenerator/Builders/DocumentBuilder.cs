@@ -1,9 +1,4 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.InteropServices;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media;
 using System.Xml;
 
 namespace DatasheetGenerator
@@ -2253,6 +2248,18 @@ e9+691737r3Xvfuvde9+691//9k=</pkg:binaryData>
 </pkg:part>
 </pkg:package>";
 
+            string LineBreakSpacer = @"<w:p>
+    <w:pPr>
+        <w:rPr>
+            <w:vanish/>
+        </w:rPr>
+    </w:pPr>
+    <w:r>
+        <w:t xml:space='preserve'>
+        </w:t>
+    </w:r>
+</w:p>";
+
             //********** THIS IS THE MISSING AREA **********//
 
 
@@ -2299,14 +2306,8 @@ e9+691737r3Xvfuvde9+691//9k=</pkg:binaryData>
 
 
             //********** THIS IS THE MISSING AREA **********//
-            fullXML = headermsc + header + columns + windows + footerMsc;
+            fullXML = headermsc + header + columns + LineBreakSpacer +  windows + footerMsc;
 
-
-
-
-
-
-            //Console.WriteLine(fullXML);
             if (Count <= 10)
             {
                 fullXML = fullXML.Replace("keyWidthPH", keyWidthArr[Count--].ToString());

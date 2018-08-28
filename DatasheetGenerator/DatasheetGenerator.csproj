@@ -58,13 +58,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CellBuilder.cs" />
-    <Compile Include="ColumnKeys.cs" />
-    <Compile Include="CurrentColumnValues.cs" />
-    <Compile Include="DocumentBuilder.cs" />
-    <Compile Include="HeaderGenerator.cs" />
-    <Compile Include="UploadXML.cs" />
-    <Compile Include="WindowBuilder.cs" />
+    <Compile Include="Builders\CellBuilder.cs" />
+    <Compile Include="Classes\House.cs" />
+    <Compile Include="Classes\Windows.cs" />
+    <Compile Include="Classes\ColumnKeys.cs" />
+    <Compile Include="Classes\CurrentColumnValues.cs" />
+    <Compile Include="Builders\DocumentBuilder.cs" />
+    <Compile Include="Builders\HeaderGenerator.cs" />
+    <Compile Include="UtilityMethods\UploadXML.cs" />
+    <Compile Include="Builders\WindowBuilder.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

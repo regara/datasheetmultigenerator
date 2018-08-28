@@ -1083,7 +1083,7 @@ namespace DatasheetGenerator
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
                                 <w:sz w:val='22'/>
                             </w:rPr>
-                            <w:t>@</w:t>
+                            <w:t>in</w:t>
                         </w:r>
                         <w:r w:rsidR='00FE10F0'>
                             <w:rPr>

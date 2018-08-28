@@ -57,37 +57,20 @@ namespace DatasheetGenerator
         public static string UEF { get; set; }
         public static string DISTRIBUTION { get; set; }
 
+        //Windows / Skylight
+        // [ [Type], [UVal], [SHGC], [Msc User stuff Hard Coded] ] 
+        public static List<List<string>> windowArray { get; set; } = new List<List<string>>{
+            new List<string>{"Windows"},
+            new List<string>{"U-Value"},
+            new List<string>{"SHGC"},
+            new List<string>{""},
+            new List<string> { " ", "If all data is acceptable, please sign", "Print Name: ", "Signature: ", "Date: ", "Contractor License" }
 
-        // Skylight
-        public static List<string> windowsUV { get; set; } = new List<string>();
-        public static List<string> windowsSHGC { get; set; } = new List<string>();
-        public static List<string> windowTypes { get; set; } = new List<string>();
+        };
 
-        public static List<string> skyLTUV { get; set; } = new List<string>();
-        public static List<string> skyLTSHGC { get; set; } = new List<string>();
-        public static List<string> skyLTTypes { get; set; } = new List<string>();
+        
 
-        // TEMPORARY WINDOW STUFF
-
-        public static string WIN1 { get; set; }
-        public static string WIN2 { get; set; }
-        public static string WIN3 { get; set; }
-        public static string WIN4 { get; set; }
-
-        public static string UVAL1 { get; set; }
-        public static string UVAL2 { get; set; }
-        public static string UVAL3 { get; set; }
-        public static string UVAL4 { get; set; }
-
-        public static string SHGC1 { get; set; }
-        public static string SHGC2 { get; set; }
-        public static string SHGC3 { get; set; }
-        public static string SHGC4 { get; set; }
-
-        public static string SKYLT { get; set; }
-        public static string UVAL { get; set; }
-        public static string SHGC { get; set; }
-
+        public List<bool> WindowExists { get; set; } = new List<bool> {false,false,false};
 
         public CurrentColumnValues(XDocument doc)
         {
@@ -388,6 +371,7 @@ namespace DatasheetGenerator
             _kneeWall = string.Join(" / ", _kneeWall.Split('/').Distinct().OrderBy(x => x));
 
 
+
             /*********************** WINDOWS ***********************/
             foreach (var zones in proposed.Elements("Zone"))
             {
@@ -396,30 +380,38 @@ namespace DatasheetGenerator
 
                     foreach (var windows in walls.Elements("Win"))
                     {
+                        //resets checking
+                        for (var i = 0; i < WindowExists.Count; i++) WindowExists[i] = false;
 
 
 
-                        if (!windowsUV.Contains(windows.Element("NFRCUfactor")?.Value) ||
-                            !windowsSHGC.Contains(windows.Element("NFRCSHGC")?.Value) ||
-                            !windowTypes.Contains(windows.Element("WinType")?.Value))
+                        windowArray[0].ForEach(e => { if (e.Contains(windows.Element("WinType")?.Value)) WindowExists[0] = true; });
+                        windowArray[1].ForEach(e => { if (e.Contains(windows.Element("NFRCUfactor")?.Value)) WindowExists[1] = true; });
+                        windowArray[2].ForEach(e => { if (e.Contains(windows.Element("NFRCSHGC")?.Value)) WindowExists[2] = true; });
+
+
+                        if (!WindowExists[0] && !WindowExists[1] && !WindowExists[2])
                         {
+                            Console.WriteLine("Unique Window To Array");
 
-                            windowsUV.Add(windows.Element("NFRCUfactor")?.Value);
-                            windowsSHGC.Add(windows.Element("NFRCSHGC")?.Value);
-                            windowTypes.Add(windows.Element("WinType")?.Value);
+                            windowArray[0].Add(windows.Element("WinType")?.Value);
+                            windowArray[1].Add(windows.Element("NFRCUfactor")?.Value);
+                            windowArray[2].Add(windows.Element("NFRCSHGC")?.Value);
                         }
+
+                    
+
                     }
                 }
             }
 
+            //Update this to somethign like above (windows)
             if (skyLightExists)
             {
-                skyLTUV.Add("Skylight");
-                skyLTSHGC.Add(userInput.Descendants("Skylt").FirstOrDefault().Element("NFRCUfactor").Value);
-                skyLTTypes.Add(userInput.Descendants("Skylt").FirstOrDefault().Element("NFRCSHGC").Value);
+                windowArray[0].Add("Skylight");
+                windowArray[1].Add(userInput.Descendants("Skylt").FirstOrDefault().Element("NFRCUfactor").Value);
+                windowArray[2].Add(userInput.Descendants("Skylt").FirstOrDefault().Element("NFRCSHGC").Value);
             }
-
-
 
             /*********************** PLACEHOLDER ***********************/
 
@@ -523,36 +515,6 @@ namespace DatasheetGenerator
             FUELTYPE = property.fuelType;
             UEF = _waterHeater;
             DISTRIBUTION = property.distribution;
-
-
-
-
-            WIN1 = (windowTypes.ElementAtOrDefault(0) != null) ? windowTypes[0] : "";
-            WIN2 = (windowTypes.ElementAtOrDefault(1) != null) ? windowTypes[1] : "";
-            WIN3 = (windowTypes.ElementAtOrDefault(2) != null) ? windowTypes[2] : "";
-            WIN4 = (windowTypes.ElementAtOrDefault(3) != null) ? windowTypes[3] : "";
-
-
-            UVAL1 = (windowsUV.ElementAtOrDefault(0) != null) ? windowsUV[0] : "";
-            UVAL2 = (windowsUV.ElementAtOrDefault(1) != null) ? windowsUV[1] : "";
-            UVAL3 = (windowsUV.ElementAtOrDefault(2) != null) ? windowsUV[2] : "";
-            UVAL4 = (windowsUV.ElementAtOrDefault(3) != null) ? windowsUV[3] : "";
-
-
-            SHGC1 = (windowsSHGC.ElementAtOrDefault(0) != null) ? windowsSHGC[0] : "";
-            SHGC2 = (windowsSHGC.ElementAtOrDefault(1) != null) ? windowsSHGC[1] : "";
-            SHGC3 = (windowsSHGC.ElementAtOrDefault(2) != null) ? windowsSHGC[2] : "";
-            SHGC4 = (windowsSHGC.ElementAtOrDefault(3) != null) ? windowsSHGC[3] : "";
-
-
-            SKYLT = (skyLightExists) ? "Skylight" : "";
-            UVAL = (skyLightExists) ? userInput.Descendants("Skylt").FirstOrDefault().Element("NFRCUfactor").Value : "";
-            SHGC = (skyLightExists) ? userInput.Descendants("Skylt").FirstOrDefault().Element("NFRCSHGC").Value : "";
-
-
-
-
-
 
 
 
