@@ -22,7 +22,7 @@ namespace DatasheetGenerator
 
                 //Sets the key for each row
                 MainContentCellsToString += columnKeys[i];
-
+                
                 //Foreach Row[i] append each Column[currentColumn] -- Left to Right Then Top to Bottom -- allColumnsArr[currentColumn][i]
                 while (currentColumn < allColumnsArr.Count)
                 {
@@ -30,7 +30,7 @@ namespace DatasheetGenerator
                     {
                         MainContentCellsToString += @"<w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='keyWidthPH' w:type='pct'/>
+                        <w:tcW w:w='columnWidth' w:type='pct'/>
                         <w:tcBorders>
                             <w:bottom w:val='single' w:sz='4' w:space='0' w:color='auto'/>
                         </w:tcBorders>
@@ -42,7 +42,7 @@ namespace DatasheetGenerator
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='ColumnFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                         </w:pPr>
@@ -50,7 +50,7 @@ namespace DatasheetGenerator
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='ColumnFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                             <w:t>" + allColumnsArr[currentColumn][i] + @"</w:t>
@@ -62,7 +62,7 @@ namespace DatasheetGenerator
                     {
                         MainContentCellsToString += @"<w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='keyWidthPH' w:type='pct'/>
+                        <w:tcW w:w='columnWidth' w:type='pct'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
                     <w:p>
@@ -71,7 +71,7 @@ namespace DatasheetGenerator
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='ColumnFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                         </w:pPr>
@@ -79,7 +79,7 @@ namespace DatasheetGenerator
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='ColumnFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                             <w:t>" + allColumnsArr[currentColumn][i] + @"</w:t>

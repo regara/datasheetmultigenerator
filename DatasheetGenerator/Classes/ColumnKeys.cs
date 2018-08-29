@@ -7,13 +7,14 @@ namespace DatasheetGenerator
         //////////////////////////  Starting Values (key and setup data)   /////////////////////////
         public List<string> mainContentKeysArr { get; set; }
 
+
         public string PHOTO = @"<w:tr w:rsidR='00C834F9' w:rsidTr='00FC375E'>
                 <w:trPr>
                     <w:trHeight w:val='80'/>
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
                     <w:p w:rsidR='00C834F9' w:rsidRDefault='00C834F9'>
@@ -22,7 +23,7 @@ namespace DatasheetGenerator
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                         </w:pPr>
@@ -30,7 +31,7 @@ namespace DatasheetGenerator
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                             <w:t>Photovoltaic</w:t>
@@ -43,7 +44,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
                     <w:p w:rsidR='00C834F9' w:rsidRDefault='00C834F9'>
@@ -52,7 +53,7 @@ namespace DatasheetGenerator
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                         </w:pPr>
@@ -60,7 +61,7 @@ namespace DatasheetGenerator
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                             <w:t>HERS Index Score</w:t>
@@ -73,7 +74,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:tcBorders>
                             <w:bottom w:val='single' w:sz='4' w:space='0' w:color='auto'/>
                         </w:tcBorders>
@@ -85,7 +86,7 @@ namespace DatasheetGenerator
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                         </w:pPr>
@@ -93,7 +94,7 @@ namespace DatasheetGenerator
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                             <w:t id='WALLTYPE'>Plan (WALLTYPE)</w:t>
@@ -106,7 +107,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:tcBorders>
                             <w:top w:val='single' w:sz='4' w:space='0' w:color='auto'/>
                         </w:tcBorders>
@@ -118,7 +119,7 @@ namespace DatasheetGenerator
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:b w:val='0'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                         </w:pPr>
@@ -126,7 +127,7 @@ namespace DatasheetGenerator
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:b w:val='0'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                             <w:t>File Name</w:t>
@@ -139,7 +140,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
                     <w:p w:rsidR='00282263' w:rsidRDefault='00282263'>
@@ -149,7 +150,7 @@ namespace DatasheetGenerator
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:bCs/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                         </w:pPr>
@@ -158,7 +159,7 @@ namespace DatasheetGenerator
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:bCs/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                             <w:t>Square Footage</w:t>
@@ -171,7 +172,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
                     <w:p w:rsidR='00282263' w:rsidRDefault='00282263'>
@@ -180,7 +181,7 @@ namespace DatasheetGenerator
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                         </w:pPr>
@@ -188,7 +189,7 @@ namespace DatasheetGenerator
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                             <w:t>% Above Code</w:t>
@@ -201,7 +202,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
                     <w:p w:rsidR='00282263' w:rsidRDefault='00282263'>
@@ -211,7 +212,7 @@ namespace DatasheetGenerator
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:b w:val='0'/>
                                 <w:bCs/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                         </w:pPr>
@@ -220,7 +221,7 @@ namespace DatasheetGenerator
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:b w:val='0'/>
                                 <w:bCs/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                             <w:t>% Cooling Improvement</w:t>
@@ -233,7 +234,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
                     <w:p w:rsidR='00282263' w:rsidRDefault='00282263'>
@@ -243,7 +244,7 @@ namespace DatasheetGenerator
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:b w:val='0'/>
                                 <w:bCs/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                         </w:pPr>
@@ -252,7 +253,7 @@ namespace DatasheetGenerator
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:b w:val='0'/>
                                 <w:bCs/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                             <w:t>Number of Stories</w:t>
@@ -265,7 +266,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:tcBorders>
                             <w:bottom w:val='single' w:sz='4' w:space='0' w:color='auto'/>
                         </w:tcBorders>
@@ -278,7 +279,7 @@ namespace DatasheetGenerator
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:b w:val='0'/>
                                 <w:bCs/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                         </w:pPr>
@@ -287,7 +288,7 @@ namespace DatasheetGenerator
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:b w:val='0'/>
                                 <w:bCs/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                                 <w:u w:val='none'/>
                             </w:rPr>
                             <w:t>Glazing Percentage</w:t>
@@ -300,7 +301,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:tcBorders>
                             <w:top w:val='single' w:sz='4' w:space='0' w:color='auto'/>
                         </w:tcBorders>
@@ -311,7 +312,7 @@ namespace DatasheetGenerator
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                         </w:pPr>
                         <w:r>
@@ -320,7 +321,7 @@ namespace DatasheetGenerator
                                 <w:b/>
                                 <w:bCs/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:pict>
                                 <v:shapetype id='_x0000_t202' coordsize='21600,21600' o:spt='202' path='m,l,21600r21600,l21600,xe'>
@@ -358,7 +359,7 @@ namespace DatasheetGenerator
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:t>Roofing Material</w:t>
                         </w:r>
@@ -370,7 +371,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
@@ -379,14 +380,14 @@ namespace DatasheetGenerator
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                         </w:pPr>
                         <w:r>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:t>Reflectance/</w:t>
                         </w:r>
@@ -394,7 +395,7 @@ namespace DatasheetGenerator
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial' w:cs='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:t>Emittance</w:t>
                         </w:r>
@@ -406,7 +407,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
@@ -414,13 +415,13 @@ namespace DatasheetGenerator
                         <w:pPr>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                         </w:pPr>
                         <w:r>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:t>Attic Floor/Vault**</w:t>
                         </w:r>
@@ -432,7 +433,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
@@ -440,13 +441,13 @@ namespace DatasheetGenerator
                         <w:pPr>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                         </w:pPr>
                         <w:r>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:t>Attic Above Roof Deck</w:t>
                         </w:r>
@@ -458,7 +459,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
@@ -466,13 +467,13 @@ namespace DatasheetGenerator
                         <w:pPr>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                         </w:pPr>
                         <w:r>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:t>Attic Below Roof Deck</w:t>
                         </w:r>
@@ -484,7 +485,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
@@ -514,7 +515,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
@@ -522,13 +523,13 @@ namespace DatasheetGenerator
                         <w:pPr>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                         </w:pPr>
                         <w:r>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:t>Wall 2x4</w:t>
                         </w:r>
@@ -540,7 +541,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
@@ -548,13 +549,13 @@ namespace DatasheetGenerator
                         <w:pPr>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                         </w:pPr>
                         <w:r>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:t>Wall 2x6</w:t>
                         </w:r>
@@ -566,7 +567,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
@@ -574,13 +575,13 @@ namespace DatasheetGenerator
                         <w:pPr>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                         </w:pPr>
                         <w:r>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:t>Knee Wall</w:t>
                         </w:r>
@@ -592,7 +593,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
@@ -600,13 +601,13 @@ namespace DatasheetGenerator
                         <w:pPr>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                         </w:pPr>
                         <w:r>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:t>Floor Over Garage/Exterior</w:t>
                         </w:r>
@@ -618,7 +619,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:tcBorders>
                             <w:bottom w:val='single' w:sz='4' w:space='0' w:color='auto'/>
                         </w:tcBorders>
@@ -629,13 +630,13 @@ namespace DatasheetGenerator
                         <w:pPr>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                         </w:pPr>
                         <w:r>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:t>Sub Floor/Slab</w:t>
                         </w:r>
@@ -647,7 +648,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:tcBorders>
                             <w:top w:val='single' w:sz='4' w:space='0' w:color='auto'/>
                         </w:tcBorders>
@@ -658,14 +659,14 @@ namespace DatasheetGenerator
                         <w:pPr>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                         </w:pPr>
                         <w:r>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:pict>
                                 <v:shape id='_x0000_s1183' type='#_x0000_t202' style='position:absolute;margin-left:-23.2pt;margin-top:-.6pt;width:27pt;height:53.75pt;z-index:2;mso-position-horizontal-relative:text;mso-position-vertical-relative:text' filled='f' stroked='f'>
@@ -698,7 +699,7 @@ namespace DatasheetGenerator
                         <w:r w:rsidR='00A36229'>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:t>Minimum SEER/EER Value</w:t>
                         </w:r>
@@ -710,7 +711,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='center'/>
                     </w:tcPr>
@@ -718,13 +719,13 @@ namespace DatasheetGenerator
                         <w:pPr>
                             <w:rPr>
                                 <w:rFonts w:ascii='Papyrus' w:hAnsi='Papyrus'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                         </w:pPr>
                         <w:r>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:t>Minimum AFUE</w:t>
                         </w:r>
@@ -736,7 +737,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='center'/>
                     </w:tcPr>
@@ -744,13 +745,13 @@ namespace DatasheetGenerator
                         <w:pPr>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                         </w:pPr>
                         <w:r>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:t>Duct Insulation</w:t>
                         </w:r>
@@ -762,7 +763,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:tcBorders>
                             <w:bottom w:val='single' w:sz='4' w:space='0' w:color='auto'/>
                         </w:tcBorders>
@@ -774,14 +775,14 @@ namespace DatasheetGenerator
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                         </w:pPr>
                         <w:r>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:t>Whole House Fan (CFM)</w:t>
                         </w:r>
@@ -793,7 +794,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:tcBorders>
                             <w:top w:val='single' w:sz='4' w:space='0' w:color='auto'/>
                         </w:tcBorders>
@@ -875,7 +876,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
@@ -904,7 +905,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
@@ -933,7 +934,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:tcBorders>
                             <w:bottom w:val='single' w:sz='4' w:space='0' w:color='auto'/>
                         </w:tcBorders>
@@ -965,7 +966,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:tcBorders>
                             <w:top w:val='single' w:sz='4' w:space='0' w:color='auto'/>
                         </w:tcBorders>
@@ -976,13 +977,13 @@ namespace DatasheetGenerator
                         <w:pPr>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                         </w:pPr>
                         <w:r>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:t xml:space='preserve'>Refrigerant Charge </w:t>
                         </w:r>
@@ -994,7 +995,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
@@ -1023,7 +1024,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
@@ -1052,7 +1053,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
@@ -1081,7 +1082,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
@@ -1110,7 +1111,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
@@ -1139,7 +1140,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
@@ -1168,7 +1169,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
@@ -1197,7 +1198,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:tcBorders>
                             <w:bottom w:val='single' w:sz='4' w:space='0' w:color='auto'/>
                         </w:tcBorders>
@@ -1208,14 +1209,14 @@ namespace DatasheetGenerator
                         <w:pPr>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                         </w:pPr>
                         <w:r>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
                                 <w:noProof/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:pict>
                                 <v:shape id='_x0000_s1185' type='#_x0000_t202' style='position:absolute;margin-left:-22.85pt;margin-top:1.55pt;width:27pt;height:63.95pt;z-index:4;mso-position-horizontal-relative:text;mso-position-vertical-relative:text' filled='f' stroked='f'>
@@ -1280,7 +1281,7 @@ namespace DatasheetGenerator
                         <w:r w:rsidR='00A36229'>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:t>Insulation Inspection**</w:t>
                         </w:r>
@@ -1292,7 +1293,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:tcBorders>
                             <w:top w:val='single' w:sz='4' w:space='0' w:color='auto'/>
                         </w:tcBorders>
@@ -1321,7 +1322,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:shd w:val='clear' w:color='auto' w:fill='auto'/>
                         <w:vAlign w:val='bottom'/>
                     </w:tcPr>
@@ -1329,15 +1330,15 @@ namespace DatasheetGenerator
                         <w:pPr>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                         </w:pPr>
                         <w:r>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
-                            <w:t>Uniform Energy Factor (Tank Size)</w:t>
+                            <w:t>Uniform Energy Factor (Gal.)</w:t>
                         </w:r>
                     </w:p>
                 </w:tc>";
@@ -1347,7 +1348,7 @@ namespace DatasheetGenerator
                 </w:trPr>
                 <w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='3331' w:type='pct'/>
+                        <w:tcW w:w='keyWidth' w:type='pct'/>
                         <w:tcBorders>
                             <w:bottom w:val='single' w:sz='4' w:space='0' w:color='auto'/>
                         </w:tcBorders>
@@ -1357,13 +1358,13 @@ namespace DatasheetGenerator
                         <w:pPr>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                         </w:pPr>
                         <w:r>
                             <w:rPr>
                                 <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                                <w:sz w:val='20'/>
+                                <w:sz w:val='KeyFontWeight'/>
                             </w:rPr>
                             <w:t>Distribution</w:t>
                         </w:r>

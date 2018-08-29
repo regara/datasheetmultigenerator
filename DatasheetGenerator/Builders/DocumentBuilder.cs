@@ -14,52 +14,126 @@ namespace DatasheetGenerator
         public int Count { get; set; } = MainWindow.Count;
         public XmlDocument datasheet = new XmlDocument();
 
-        public static int[] colWdithArr =
-        {
-            1669,
-            1500,
-            1154,
-            938,
-            749,
-            624,
-            536,
-            469,
-            430,
-            327,
-            293
-        };
+                public static int[] colWdithArr =
+                {
+                    1669,
+                    1500,
+                    1154,
+                    938,
+                    749,
+                    624,
+                    536,
+                    469,
+                    430,
+                    327,
+                    293
+                };
+        
+                // COLUMN - <TBLPR>
+                public static int[] pageWidthArr =
+                {
+                    2729,
+                    3898,
+                    5068,
+                    6238,
+                    6245,
+                    6245,
+                    6245,
+                    6245,
+                    6245,
+                    6498,
+                    4811
+                };
+        
+                // COLUMNS
+                public static int[] keyWidthArr =
+                {
+                    3331,
+                    1997,
+                    1536,
+                    1248,
+                    1247,
+                    1246,
+                    1245,
+                    1246,
+                    1125,
+                    1082,
+                    577
+                };
 
-        // COLUMN - <TBLPR>
-        public static int[] pageWidthArr =
-        {
-            2729,
-            3898,
-            5068,
-            6238,
-            6245,
-            6245,
-            6245,
-            6245,
-            6245,
-            6498,
-            4811
-        };
+                public static int[] KeyFontWeight = {
+                    20,
+                    20,
+                    20,
+                    20,
+                    20,
+                    20,
+                    20,
+                    20,
+                    18,
+                    16
+                }; 
 
-        // COLUMNS
-        public static int[] keyWidthArr =
-        {
-            3331,
-            1997,
-            1536,
-            1248,
-            1247,
-            1246,
-            1245,
-            1246,
-            1125,
-            1082,
-            577
-        };
+                public static int[] ColumnFontWeight = {
+                    18,
+                    18,
+                    18,
+                    18,
+                    18,
+                    18,
+                    18,
+                    18,
+                    18,
+                    16
+                };
+
+
+//        public static int[] colWdithArr =
+//        {
+//            500,
+//            500,
+//            500,
+//            500,
+//            500,
+//            500,
+//            500,
+//            500,
+//            500,
+//            500,
+//            500
+//        };
+//        
+//        // COLUMN - <TBLPR>
+//        public static int[] pageWidthArr =
+//        {
+//            2000,
+//            2500,
+//            3000,
+//            3500,
+//            4000,
+//            4500,
+//            5000,
+//            5500,
+//            6000,
+//            6500,
+//            7000
+//        };
+//
+//        // COLUMNS
+//        public static int[] keyWidthArr =
+//        {
+//            1500,
+//            1500,
+//            1500,
+//            1500,
+//            1500,
+//            1500,
+//            1500,
+//            1500,
+//            1500,
+//            1500,
+//            1500
+//        };
 
 
         public DocumentBuilder(string header, string columns, string windows)
@@ -2248,27 +2322,15 @@ e9+691737r3Xvfuvde9+691//9k=</pkg:binaryData>
 </pkg:part>
 </pkg:package>";
 
-            string LineBreakSpacer = @"<w:p>
-    <w:pPr>
-        <w:rPr>
-            <w:vanish/>
-        </w:rPr>
-    </w:pPr>
-    <w:r>
-        <w:t xml:space='preserve'>
-        </w:t>
-    </w:r>
-</w:p>";
-
             //********** THIS IS THE MISSING AREA **********//
 
 
             int keyWidth = (Count < 10) ? pageWidthArr[Count] : pageWidthArr[10];
 
-
+            //This string is for the page width
             columns = @"<w:tbl>
             <w:tblPr>
-                <w:tblW w:w='" + Convert.ToString(keyWidth) + @"' w:type='pct'/>
+                <w:tblW w:w='pageWidth' w:type='pct'/>
                 <w:tblInd w:w='-1072' w:type='dxa'/>
                 <w:tblCellMar>
                     <w:left w:w='0' w:type='dxa'/>
@@ -2303,22 +2365,28 @@ e9+691737r3Xvfuvde9+691//9k=</pkg:binaryData>
             columns += "</w:tbl>";
 
 
-
-
+            
             //********** THIS IS THE MISSING AREA **********//
-            fullXML = headermsc + header + columns + LineBreakSpacer +  windows + footerMsc;
+            fullXML = headermsc + header + columns +  windows + footerMsc;
 
             if (Count <= 10)
             {
-                fullXML = fullXML.Replace("keyWidthPH", keyWidthArr[Count--].ToString());
-
-                fullXML = fullXML.Replace("widthPH", keyWidthArr[Count--].ToString());
+                Console.WriteLine("Count === " + Count);
+                fullXML = fullXML.Replace("pageWidth", pageWidthArr[Count -1].ToString());
+                fullXML = fullXML.Replace("keyWidth", keyWidthArr[Count - 1].ToString());
+                fullXML = fullXML.Replace("columnWidth", colWdithArr[Count - 1].ToString());
+                fullXML = fullXML.Replace("KeyFontWeight", KeyFontWeight[Count - 1].ToString());
+                fullXML = fullXML.Replace("ColumnFontWeight", ColumnFontWeight[Count - 1].ToString());
             }
             else
             {
+                fullXML = fullXML.Replace("pageWidth", pageWidthArr[10].ToString());
                 fullXML = fullXML.Replace("keyWidthPH", keyWidthArr[10].ToString());
-                fullXML = fullXML.Replace("widthPH", colWdithArr[10].ToString());
+                fullXML = fullXML.Replace("columnWidth", colWdithArr[10].ToString());
+                fullXML = fullXML.Replace("KeyFontWeight", KeyFontWeight[Count - 1].ToString());
+                fullXML = fullXML.Replace("ColumnFontWeight", ColumnFontWeight[Count - 1].ToString());
 
+                
             }
 
 

@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading;
 
 namespace DatasheetGenerator
 {
@@ -28,17 +25,17 @@ namespace DatasheetGenerator
                          <w:tblLook w:val='0000' w:firstRow='0' w:lastRow='0' w:firstColumn='0' w:lastColumn='0' w:noHBand='0' w:noVBand='0'/>
                      </w:tblPr>
                      <w:tblGrid>
-                         <w:gridCol w:w='3268'/>
+                         <w:gridCol w:w='2268'/>
                          <w:gridCol w:w='1116'/>
                          <w:gridCol w:w='1116'/>
                          <w:gridCol w:w='1170'/>
-                         <w:gridCol w:w='4238'/>
+                         <w:gridCol w:w='5238'/>
                      </w:tblGrid>";
         
 
 
 
-        string windowCellBuilder(string value, bool border, bool centered, bool highlighted, string cellWidth)
+        string windowCellBuilder(string value, bool border, bool centered, bool highlighted, string cellWidth, bool Bold, bool Underlined, bool rightAligned)
         {
 
             var builder = "<w:tc>";
@@ -46,7 +43,7 @@ namespace DatasheetGenerator
             if(border)
                 builder += @"
                     <w:tcPr>
-                        <w:tcW w:w='4238' w:type='dxa'/>
+                        <w:tcW w:w='5238' w:type='dxa'/>
                         <w:tcBorders>
                             <w:top w:val='single' w:sz='4' w:space='0' w:color='auto'/>
                             <w:left w:val='single' w:sz='4' w:space='0' w:color='auto'/>
@@ -60,20 +57,22 @@ namespace DatasheetGenerator
                 </w:tcPr>";
 
             builder += @"<w:p>
-                   <w:pPr>
-                       <w:rPr>";
-    
-            if(centered) builder += "<w:jc w:val='center'/>";
+                   <w:pPr>";
+            if (Bold) builder += "<w:pStyle w:val='Heading7'/>";
+            if (centered) builder += "<w:jc w:val='center'/>";
+            if (rightAligned) builder += "<w:jc w:val='right'/>";
 
-
-            builder += @"  <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                           <w:sz w:val='18'/>
+            builder += @"<w:rPr>
+                            <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
+                           <w:sz w:val='20'/>
                        </w:rPr>
                    </w:pPr>
                    <w:r>
                        <w:rPr>
                            <w:rFonts w:ascii='Arial' w:hAnsi='Arial'/>
-                           <w:sz w:val='18'/>";
+                           <w:sz w:val='20'/>";
+
+            if (Underlined) builder += "<w:u w:val='single'/>";
 
             if (highlighted) builder += "<w:highlight w:val='lightGray'/>";
 
@@ -155,8 +154,13 @@ namespace DatasheetGenerator
                         windowArrays[a][i],
                         (a == 4),
                         (a == 1 || a == 2),
-                        (a == 3 && CurrentColumnValues.windowArray[a].Contains("PO")) || (a == 1 && CurrentColumnValues.windowArray[a].Contains("date")),
-                        i.ToString()
+//                      (a == 3 && CurrentColumnValues.windowArray[a].Contains("PO")) || (a == 1 && CurrentColumnValues.windowArray[a].Contains("date")),
+//                      Last index(i)  ^^^^^^
+                        false,
+                        WindowCellWidthArr[a],
+                        (a == 1 && i == 0) || (a == 2 && i == 0),
+                        (a == 1 && i == 0) || (a == 2 && i == 0),
+                        (a == 0 && i != 0)
                     );
 
                 }
@@ -175,15 +179,32 @@ namespace DatasheetGenerator
                         false,
                         false,
                         false,
-                        i.ToString()
+                        i.ToString(),
+                        false,
+                        false,
+                        false
                     );
 
                     windowBuild += windowCellBuilder(
-                        "DATE",
+                        "date",
+                        false,
+                        false,
+                        true,
+                        i.ToString(),
+                        false,
+                        false,
+                        false
+                    ).Replace("<w:sz w:val='20'/>", "<w:sz w:val='22'/>");
+
+                    windowBuild += windowCellBuilder(
+                        "",
                         false,
                         false,
                         false,
-                        i.ToString()
+                        i.ToString(),
+                        false,
+                        false,
+                        false
                     );
 
                     windowBuild += windowCellBuilder(
@@ -191,20 +212,15 @@ namespace DatasheetGenerator
                         false,
                         false,
                         false,
-                        i.ToString()
-                    );
-
-                    windowBuild += windowCellBuilder(
-                        "",
+                        i.ToString(),
                         false,
                         false,
-                        false,
-                        i.ToString()
+                        false
                     );
 
                     windowBuild += @"<w:tc>
                     <w:tcPr>
-                        <w:tcW w:w='4238' w:type='dxa'/>
+                        <w:tcW w:w='5238' w:type='dxa'/>
                         <w:tcBorders>
                             <w:top w:val='single' w:sz='4' w:space='0' w:color='auto'/>
                             <w:left w:val='single' w:sz='4' w:space='0' w:color='auto'/>

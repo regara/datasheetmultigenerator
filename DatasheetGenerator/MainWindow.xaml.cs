@@ -110,7 +110,7 @@ namespace DatasheetGenerator
                 if ((Count - deletedColumnCount) >= 10)
                 {
                     Console.WriteLine("Limit reached - " + Count);
-                    ErrorBanner.Text = "Limit reached (10) - Will increase to 15 in the future";
+                    ErrorBanner.Text += "Limit reached (10) - Will increase to 15 in the future";
 
                     Upload.IsEnabled = false;
 
@@ -138,7 +138,7 @@ namespace DatasheetGenerator
             {
                 documentBuilder = new DocumentBuilder(Header, MainContent, Windows).fullXML;
 
-                Console.WriteLine("Document Built");
+                Console.WriteLine(@"Document Built");
 
 
 
@@ -225,6 +225,25 @@ namespace DatasheetGenerator
                 ErrorBanner.Text = "Cannot Delete, if reproduceable please send xml and reproduction steps to IT.";
             }
             
+        }
+
+        private void ResetApplicationState(object sender, RoutedEventArgs e)
+        {
+            var temp = System.Windows.MessageBox.Show("Reset", "Do you want to reset the application?", MessageBoxButton.YesNo);
+
+            if (temp == MessageBoxResult.Yes)
+            {
+                //                allColumnsArr = new List<List<string>>();
+                //                CurrentColumnValues.windowArray = new List<List<string>>();
+                //                Count = 0;
+                //                deletedColumnCount = 0;
+                //
+                //                Container.Children.Clear();
+                //                Upload.IsEnabled = true;
+
+                System.Windows.Forms.Application.Restart();
+                System.Windows.Application.Current.Shutdown();
+            }
         }
     }
 }

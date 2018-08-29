@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2042
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatasheetGenerator", "DatasheetGenerator\DatasheetGenerator.csproj", "{0ECEB191-2257-4D4E-952E-E38B08F117BD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatasheetGenerator.UnitTests", "DatasheetGenerator.UnitTests\DatasheetGenerator.UnitTests.csproj", "{147FAB15-D54B-4595-9E73-C7AEA84EC32C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0ECEB191-2257-4D4E-952E-E38B08F117BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0ECEB191-2257-4D4E-952E-E38B08F117BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0ECEB191-2257-4D4E-952E-E38B08F117BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{147FAB15-D54B-4595-9E73-C7AEA84EC32C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{147FAB15-D54B-4595-9E73-C7AEA84EC32C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{147FAB15-D54B-4595-9E73-C7AEA84EC32C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{147FAB15-D54B-4595-9E73-C7AEA84EC32C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
