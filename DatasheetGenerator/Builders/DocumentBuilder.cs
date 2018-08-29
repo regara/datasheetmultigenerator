@@ -6,13 +6,13 @@ namespace DatasheetGenerator
     public class DocumentBuilder
     {
 
-        public string headermsc { get; set; }
-        public string footerMsc { get; set; }
+        public string Headermsc { get; set; }
+        public string FooterMsc { get; set; }
 
-        public string fullXML { get; set; }
+        public string FullXml { get; set; }
 
         public int Count { get; set; } = MainWindow.Count;
-        public XmlDocument datasheet = new XmlDocument();
+        public XmlDocument Datasheet = new XmlDocument();
 
                 public static int[] colWdithArr =
                 {
@@ -141,7 +141,7 @@ namespace DatasheetGenerator
 
 
             //Headermsc
-            headermsc = @"<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
+            Headermsc = @"<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
 <?mso-application progid='Word.Document'?>
 <pkg:package xmlns:pkg='http://schemas.microsoft.com/office/2006/xmlPackage'>
 <pkg:part pkg:name='/_rels/.rels' pkg:contentType='application/vnd.openxmlformats-package.relationships+xml' pkg:padding='512'>
@@ -175,7 +175,7 @@ namespace DatasheetGenerator
     <w:body>
         <w:tbl>";
 
-            footerMsc = @"</w:tbl>
+            FooterMsc = @"</w:tbl>
         <w:p w:rsidR='00D23B71' w:rsidRPr='006D6F73' w:rsidRDefault='00D23B71'>
             <w:pPr>
                 <w:tabs>
@@ -2367,24 +2367,24 @@ e9+691737r3Xvfuvde9+691//9k=</pkg:binaryData>
 
             
             //********** THIS IS THE MISSING AREA **********//
-            fullXML = headermsc + header + columns +  windows + footerMsc;
+            FullXml = Headermsc + header + columns +  windows + FooterMsc;
 
             if (Count <= 10)
             {
                 Console.WriteLine("Count === " + Count);
-                fullXML = fullXML.Replace("pageWidth", pageWidthArr[Count -1].ToString());
-                fullXML = fullXML.Replace("keyWidth", keyWidthArr[Count - 1].ToString());
-                fullXML = fullXML.Replace("columnWidth", colWdithArr[Count - 1].ToString());
-                fullXML = fullXML.Replace("KeyFontWeight", KeyFontWeight[Count - 1].ToString());
-                fullXML = fullXML.Replace("ColumnFontWeight", ColumnFontWeight[Count - 1].ToString());
+                FullXml = FullXml.Replace("pageWidth", pageWidthArr[Count -1].ToString());
+                FullXml = FullXml.Replace("keyWidth", keyWidthArr[Count - 1].ToString());
+                FullXml = FullXml.Replace("columnWidth", colWdithArr[Count - 1].ToString());
+                FullXml = FullXml.Replace("KeyFontWeight", KeyFontWeight[Count - 1].ToString());
+                FullXml = FullXml.Replace("ColumnFontWeight", ColumnFontWeight[Count - 1].ToString());
             }
             else
             {
-                fullXML = fullXML.Replace("pageWidth", pageWidthArr[10].ToString());
-                fullXML = fullXML.Replace("keyWidthPH", keyWidthArr[10].ToString());
-                fullXML = fullXML.Replace("columnWidth", colWdithArr[10].ToString());
-                fullXML = fullXML.Replace("KeyFontWeight", KeyFontWeight[Count - 1].ToString());
-                fullXML = fullXML.Replace("ColumnFontWeight", ColumnFontWeight[Count - 1].ToString());
+                FullXml = FullXml.Replace("pageWidth", pageWidthArr[10].ToString());
+                FullXml = FullXml.Replace("keyWidthPH", keyWidthArr[10].ToString());
+                FullXml = FullXml.Replace("columnWidth", colWdithArr[10].ToString());
+                FullXml = FullXml.Replace("KeyFontWeight", KeyFontWeight[Count - 1].ToString());
+                FullXml = FullXml.Replace("ColumnFontWeight", ColumnFontWeight[Count - 1].ToString());
 
                 
             }
@@ -2393,30 +2393,30 @@ e9+691737r3Xvfuvde9+691//9k=</pkg:binaryData>
             // Sets the font size for the main content cells
             if (Count > 10)
             {
-                fullXML = fullXML.Replace("<w:sz w:val='20'/>", "<w:sz w:val='18'/>");
+                FullXml = FullXml.Replace("<w:sz w:val='20'/>", "<w:sz w:val='18'/>");
 
             }
             else if ((Count > 9))
             {
-                fullXML = fullXML.Replace("<w:sz w:val='20'/>", "<w:sz w:val='16'/>");
+                FullXml = FullXml.Replace("<w:sz w:val='20'/>", "<w:sz w:val='16'/>");
 
             }
             else if (Count > 3)
             {
-                fullXML = fullXML.Replace("<w:sz w:val='20'/>", "<w:sz w:val='18'/>");
+                FullXml = FullXml.Replace("<w:sz w:val='20'/>", "<w:sz w:val='18'/>");
 
             }
 
-            fullXML = fullXML.Replace("(WALLTYPE)", "(" + CurrentColumnValues.WALLTYPE + ")");
+            FullXml = FullXml.Replace("(WALLTYPE)", "(" + CurrentColumnValues.WALLTYPE + ")");
             //            MainWindow.ErrorBanner.Text = "";
 
 
             try
             {
-                if (fullXML != null)
+                if (FullXml != null)
                 {
-                    datasheet.LoadXml(fullXML);
-                    datasheet.Save(@"C:\Users\" + Environment.UserName + @"\Downloads\" + "Test" + " - Datasheet.doc");
+                    Datasheet.LoadXml(FullXml);
+                    Datasheet.Save(@"C:\Users\" + Environment.UserName + @"\Downloads\" + HeaderGenerator.PROJECTNAME + " - Datasheet.doc");
                 }
                 else
                 {

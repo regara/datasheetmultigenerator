@@ -136,14 +136,14 @@ namespace DatasheetGenerator
 
             try
             {
-                documentBuilder = new DocumentBuilder(Header, MainContent, Windows).fullXML;
+                documentBuilder = new DocumentBuilder(Header, MainContent, Windows).FullXml;
 
                 Console.WriteLine(@"Document Built");
 
 
 
-
-                string path = @"C:\Users\CLEIT\Downloads\output.xml";
+                //error handling prints xml file for easy viewing - fully formatted
+                /*string path = @"C:\Users\CLEIT\Downloads\output.xml";
 
                 if (!File.Exists(path))
                 {
@@ -154,7 +154,7 @@ namespace DatasheetGenerator
                         tw.WriteLine(documentBuilder);
                     }
 
-                }
+                }*/
 
 
 
