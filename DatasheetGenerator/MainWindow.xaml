@@ -6,21 +6,32 @@
         xmlns:local="clr-namespace:DatasheetGenerator"
         mc:Ignorable="d"
         Title="MainWindow" Height="850" Width="1500">
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
         <Grid>
-            <TextBox Foreground="Firebrick" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Name="ErrorBanner" BorderThickness="0,0,0,0" IsReadOnly="True"  TextWrapping="Wrap" Margin="252,0,307,756"/>
+            <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="150 0">
+                    <StackPanel Height="50" Margin="172 0 50 0" VerticalAlignment="Top">
+                        <TextBox Foreground="Firebrick"  HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Name="ErrorBanner" BorderThickness="0,0,0,0" IsReadOnly="True"  TextWrapping="Wrap" Height="50" Width="800"/>
+                    </StackPanel>
+                    <StackPanel Width="160" Margin="0 20 0 0">
+                        <Label Content="Commands" Width="160" HorizontalContentAlignment="Center" BorderBrush="DeepSkyBlue" BorderThickness="3" />
+                        <Label Content="Right Click - Delete Option" Width="160" HorizontalContentAlignment="Center" />
+                    </StackPanel>
+                </StackPanel>
 
-            <Label Content="Commands" Width="160" Margin="1183,26,101,719" HorizontalContentAlignment="Center" BorderBrush="DeepSkyBlue" BorderThickness="3" />
-            <Label Content="Right Click - Delete Option" Width="160" Margin="1186,46,98,719"/>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 60 0 0">
-                <Button Name="Upload" Content="Upload File" Click="UploadXMLClicked" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.96,-0.6"/>
-                <Button Content="Reset" Click="ResetApplicationState" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100 0 100 0" Width="75"/>
-                <Button Content="Generate Datasheet" Click="GenerateDatasheet" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="125"/>
-            </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button Name="Upload" Content="Upload File" Click="UploadXMLClicked" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.96,-0.6"/>
+                    <Button Content="Reset" Click="ResetApplicationState" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="100 0 100 0" Width="75"/>
+                    <Button Content="Generate Datasheet" Click="GenerateDatasheet" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="125"/>
+                </StackPanel>
 
-            <!-- <TextBox Grid.Column="1" Grid.Row="0" Margin="3" /> -->
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Name="Container" x:FieldModifier="public" MouseDown="DeleteColumnPrompt">
+                <!-- <TextBox Grid.Column="1" Grid.Row="0" Margin="3" /> -->
+                <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Name="Container" x:FieldModifier="public" MouseDown="DeleteColumnPrompt">
+
+                </StackPanel>
+
+            
 
             </StackPanel>
 

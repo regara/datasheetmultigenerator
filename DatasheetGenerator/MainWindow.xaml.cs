@@ -43,10 +43,10 @@ namespace DatasheetGenerator
 
             var tb = new TextBox();
 
-            tb.Height = 650;
+            tb.Height = 680;
             tb.Width = 180;
             tb.IsReadOnly = true;
-            tb.Margin = new Thickness(10, 85, 0, 0);
+            tb.Margin = new Thickness(10, 25, 0, 0);
             tb.BorderThickness = new Thickness(3, 3, 3, 3);
             tb.Padding = new Thickness(10, 0, 10, 0);
             tb.TextWrapping = TextWrapping.Wrap;
