@@ -269,7 +269,7 @@ namespace DatasheetGenerator
                             string firstWordInString = wallPathVal.Split(' ')[0];
                             string rVal = Regex.Split(firstWordInString, @"\D+")[1];
 
-                            if (firstWordInString == "existing")
+                            if (firstWordInString == "existing" || firstWordInString == "Wall")
                             {
                                 //ignore?
                             }
@@ -383,23 +383,31 @@ namespace DatasheetGenerator
                         //resets checking
                         for (var i = 0; i < WindowExists.Count; i++) WindowExists[i] = false;
 
-
-
-                        windowArray[0].ForEach(e => { if (e.Contains(windows.Element("WinType")?.Value)) WindowExists[0] = true; });
-                        windowArray[1].ForEach(e => { if (e.Contains(windows.Element("NFRCUfactor")?.Value)) WindowExists[1] = true; });
-                        windowArray[2].ForEach(e => { if (e.Contains(windows.Element("NFRCSHGC")?.Value)) WindowExists[2] = true; });
-
-
-                        if (!WindowExists[0] && !WindowExists[1] && !WindowExists[2])
+                        //If a value is null
+                        if (windows?.Element("WinType")?.Value == null || windows?.Element("NFRCUfactor")?.Value == null || windows?.Element("NFRCSHGC")?.Value == null)
                         {
-                            Console.WriteLine("Unique Window To Array");
-
-                            windowArray[0].Add(windows.Element("WinType")?.Value);
-                            windowArray[1].Add(windows.Element("NFRCUfactor")?.Value);
-                            windowArray[2].Add(windows.Element("NFRCSHGC")?.Value);
+                            if (!windowArray[0].Contains("Unknown Window"))
+                            {
+                                Console.WriteLine("Unknown Window Found");
+                                windowArray[0].Add((windows?.Element("WinType")?.Value != null) ? windows?.Element("WinType")?.Value : "Unknown Window");
+                                windowArray[1].Add((windows?.Element("NFRCUfactor")?.Value != null) ? windows?.Element("NFRCUfactor")?.Value : "Unknown Value");
+                                windowArray[2].Add((windows?.Element("NFRCSHGC")?.Value != null) ? windows?.Element("NFRCSHGC")?.Value : "Unknown Value");
+                            }
                         }
+                        else {
+                            windowArray[0].ForEach(e => { if (e.Contains(windows.Element("WinType")?.Value)) WindowExists[0] = true; });
+                            windowArray[1].ForEach(e => { if (e.Contains(windows.Element("NFRCUfactor")?.Value)) WindowExists[1] = true; });
+                            windowArray[2].ForEach(e => { if (e.Contains(windows.Element("NFRCSHGC")?.Value)) WindowExists[2] = true; });
 
-                    
+                            if (!WindowExists[0] && !WindowExists[1] && !WindowExists[2])
+                            {
+                                Console.WriteLine("Unique Window To Array");
+
+                                windowArray[0].Add(windows.Element("WinType")?.Value);
+                                windowArray[1].Add(windows.Element("NFRCUfactor")?.Value);
+                                windowArray[2].Add(windows.Element("NFRCSHGC")?.Value);
+                            }
+                        }                   
 
                     }
                 }
