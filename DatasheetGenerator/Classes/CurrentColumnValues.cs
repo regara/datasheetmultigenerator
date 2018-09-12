@@ -41,7 +41,7 @@ namespace DatasheetGenerator
         public static string DUCTINS { get; set; }
         public static string WHF { get; set; }
         public static string FANWAT { get; set; }
-        public static string AIRFLOW { get; set; } = "airflow";
+        public static string AIRFLOW { get; set; }
         public static string DUCTTEST { get; set; }
         public static string CFM { get; set; }
         public static string REFCHARGE { get; set; }
@@ -102,7 +102,7 @@ namespace DatasheetGenerator
 
 
             //            string _aboveCodePerc =  DryPath(standard.Elements("EUseSummary"), "PctSavingsCmpTDV");
-            string _aboveCodePerc = standard.Elements("EUseSummary").Elements("PctSavingsCmpTDV").FirstOrDefault()?.Value;
+            string _aboveCodePerc = standard.Elements("EUseSummary").Elements("PctSavingsCmpTDV").FirstOrDefault()?.Value + "%";
             string _spaceCool = Math.Round(Convert.ToDouble(standard.Elements("EnergyUse").SingleOrDefault(x => x.Element("Name").Value == "EU-SpcClg")?.Elements("PctImproveTDV").SingleOrDefault().Value), 1) + "%";
 
             /*********************** ATTIC ***********************/
@@ -347,8 +347,17 @@ namespace DatasheetGenerator
                             break;
                     }
                 }
+            }
 
+            string joinedBySlash(List<string> array) {
+                var tempArr = new List<string>();
 
+                array.ForEach(e =>
+                {
+                    if (!tempArr.Contains(e)) tempArr.Add(e);
+                });
+                
+                return String.Join(" / ", tempArr);
             }
 
             if (abvDeckArr.Count == 0)
@@ -359,12 +368,12 @@ namespace DatasheetGenerator
             if (blwDeckArr.Count == 0)
                 _blwRoofDeck = "-";
             else
-                _blwRoofDeck = String.Join(" / ", blwDeckArr);
+                _blwRoofDeck = joinedBySlash(blwDeckArr);
 
-            _roofMatFormated = String.Join(" / ", wallMatArr);
-            _atticFloor = String.Join(" / ", atticFloorArr);
-            _kneeWall = String.Join(" / ", kneeWallArr);
-            _floorOvrGar = String.Join(" / ", floorOvrGarArr);
+            _roofMatFormated = joinedBySlash(wallMatArr);
+            _atticFloor = joinedBySlash(atticFloorArr);
+            _kneeWall = joinedBySlash(kneeWallArr);
+            _floorOvrGar = joinedBySlash(floorOvrGarArr);
 
             _wallInsul24 = string.Join(" / ", _wallInsul24.Split('/').Distinct().OrderBy(x => x));
             _wallInsul26 = string.Join(" / ", _wallInsul26.Split('/').Distinct().OrderBy(x => x));
@@ -402,7 +411,6 @@ namespace DatasheetGenerator
                             if (!WindowExists[0] && !WindowExists[1] && !WindowExists[2])
                             {
                                 Console.WriteLine("Unique Window To Array");
-
                                 windowArray[0].Add(windows.Element("WinType")?.Value);
                                 windowArray[1].Add(windows.Element("NFRCUfactor")?.Value);
                                 windowArray[2].Add(windows.Element("NFRCSHGC")?.Value);
@@ -449,14 +457,8 @@ namespace DatasheetGenerator
                                 squareFeet = proj.Element("CondFloorArea").Value,
                                 stories = proj.Element("NumStories").Value,
                                 glazing = Math.Round(Convert.ToDouble(proj.Element("CondWinAreaCFARat").Value), 3),
-
-
-
                                 reflectEmiss = proj.Elements("Attic")?.FirstOrDefault()?.Element("RoofSolReflect").Value + " / " + proj.Elements("Attic")?.FirstOrDefault()?.Element("RoofEmiss").Value,
-                                kneeWall = "",
-                                floorOverhang = "",
-                                floorType = "",
-                                seerEer = proj.Element("SCSysRpt")?.Element("MinCoolSEER")?.Value + " / " + proj.Element("SCSysRpt")?.Element("MinCoolEER")?.Value,
+                                seerEer = (proj.Element("SCSysRpt")?.Element("MinCoolSEER")?.Value != null) ? proj.Element("SCSysRpt")?.Element("MinCoolSEER")?.Value + " / " + proj.Element("SCSysRpt")?.Element("MinCoolEER")?.Value : "-",
                                 afue = proj.Element("SCSysRpt")?.Element("MinHeatEffic")?.Value,
                                 ductInsul = proj.Element("SCSysRpt")?.Element("MinDistribInsRval")?.Value,
                                 fanWattage = proj.Element("SCSysRpt")?.Element("HERSFanEff")?.Value,
@@ -464,16 +466,11 @@ namespace DatasheetGenerator
                                 airflowVal = proj.Element("SCSysRpt")?.Element("MinCoolCFMperTon")?.Value,
                                 ductTestingReq = proj.Element("SCSysRpt")?.Element("HERSDuctLeakage")?.Value,
                                 ductTestingVal = proj.Element("SCSysRpt")?.Element("HERSDuctLkgRptMsg")?.Value,
-                                indoorAirQual = "",
                                 refCharg = proj.Element("SCSysRpt")?.Element("HERSACCharg")?.Value,
                                 seerVerif = proj.Element("SCSysRpt")?.Element("HERSSEER")?.Value,
                                 eerVerif = proj.Element("SCSysRpt")?.Element("HERSEER")?.Value,
-                                infiltration = "",
-                                ductInConditioned = "",
                                 lowLeakageAir = proj.Element("SCSysRpt")?.Element("LLAHUStatus")?.Value,
-                                insulInspect = "",
                                 fuelType = proj.Element("GasType")?.Value,
-
                                 distribution = "Standard"
                             }).SingleOrDefault();
 
@@ -501,11 +498,11 @@ namespace DatasheetGenerator
             WALL24 = _wallInsul24;
             WALL26 = _wallInsul26;
             KNEEWALL = _kneeWall;
-            OVERG = _floorOvrGar;
+            OVERG = (_floorOvrGar != "") ? _floorOvrGar : "-";
             FLOORTYPE = _floorType;
             SEEREER = property.seerEer;
-            AFUE = property.afue;
-            DUCTINS = "R-" + property.ductInsul;
+            AFUE = (property.afue != null ) ? property.afue : "-";
+            DUCTINS = (property.ductInsul != null ) ? "R-" + property.ductInsul : "-";
             WHF = _wholeHouseFan;
             FANWAT = (property.fanWattage == "1") ? "Yes" : "-";
             AIRFLOW = (property.airflow == "1") ? "Yes (" + property.airflowVal + ")" : "-";

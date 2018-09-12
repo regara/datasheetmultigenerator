@@ -16,7 +16,7 @@ namespace DatasheetGenerator
 
                 public static int[] colWdithArr =
                 {
-                    1669,
+                    1969,
                     1500,
                     1154,
                     938,
@@ -25,14 +25,14 @@ namespace DatasheetGenerator
                     536,
                     469,
                     430,
-                    327,
+                    352,
                     293
                 };
         
                 // COLUMN - <TBLPR>
                 public static int[] pageWidthArr =
                 {
-                    2729,
+                    3029,
                     3898,
                     5068,
                     6238,
@@ -57,7 +57,7 @@ namespace DatasheetGenerator
                     1245,
                     1246,
                     1125,
-                    1082,
+                    832,
                     577
                 };
 
@@ -86,54 +86,6 @@ namespace DatasheetGenerator
                     18,
                     16
                 };
-
-
-//        public static int[] colWdithArr =
-//        {
-//            500,
-//            500,
-//            500,
-//            500,
-//            500,
-//            500,
-//            500,
-//            500,
-//            500,
-//            500,
-//            500
-//        };
-//        
-//        // COLUMN - <TBLPR>
-//        public static int[] pageWidthArr =
-//        {
-//            2000,
-//            2500,
-//            3000,
-//            3500,
-//            4000,
-//            4500,
-//            5000,
-//            5500,
-//            6000,
-//            6500,
-//            7000
-//        };
-//
-//        // COLUMNS
-//        public static int[] keyWidthArr =
-//        {
-//            1500,
-//            1500,
-//            1500,
-//            1500,
-//            1500,
-//            1500,
-//            1500,
-//            1500,
-//            1500,
-//            1500,
-//            1500
-//        };
 
 
         public DocumentBuilder(string header, string columns, string windows)
@@ -2342,25 +2294,6 @@ e9+691737r3Xvfuvde9+691//9k=</pkg:binaryData>
                 <w:gridCol w:w='3142'/>
                 <w:gridCol w:w='1574'/>
             </w:tblGrid>" + columns;
-
-
-            //COLUMN KEYS
-//            for (var t = 0; t < ALLVALUES.Count; t++)
-//            {
-//
-//                
-//
-//                for (var i = 0; i < test.mainContentKeysArr.Length; i++)
-//                {
-//                    test.mainContentKeysArr[i] += test.cellBuilder(ALLVALUES[t][i]);
-//                }
-//            }
-//
-//            for (var i = 0; i < test.mainContentKeysArr.Length; i++)
-//            {
-//                test.mainContentKeysArr[i] += "</w:tr>";
-//                columns += test.mainContentKeysArr[i];
-//            }
 
             columns += "</w:tbl>";
 

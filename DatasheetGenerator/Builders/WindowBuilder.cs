@@ -154,8 +154,6 @@ namespace DatasheetGenerator
                         windowArrays[a][i],
                         (a == 4),
                         (a == 1 || a == 2),
-//                      (a == 3 && CurrentColumnValues.windowArray[a].Contains("PO")) || (a == 1 && CurrentColumnValues.windowArray[a].Contains("date")),
-//                      Last index(i)  ^^^^^^
                         false,
                         WindowCellWidthArr[a],
                         (a == 1 && i == 0) || (a == 2 && i == 0),
