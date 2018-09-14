@@ -102,8 +102,48 @@ namespace DatasheetGenerator
 
 
             //            string _aboveCodePerc =  DryPath(standard.Elements("EUseSummary"), "PctSavingsCmpTDV");
-            string _aboveCodePerc = standard.Elements("EUseSummary").Elements("PctSavingsCmpTDV").FirstOrDefault()?.Value + "%";
-            string _spaceCool = Math.Round(Convert.ToDouble(standard.Elements("EnergyUse").SingleOrDefault(x => x.Element("Name").Value == "EU-SpcClg")?.Elements("PctImproveTDV").SingleOrDefault().Value), 1) + "%";
+            string _aboveCodePerc = Math.Round(Convert.ToDouble(standard.Elements("EUseSummary").Elements("PctSavingsCmpTDV").FirstOrDefault()?.Value),1) + "%";
+
+
+            string getSpaceCoolVal() {
+
+                XElement spaceCoolPath(string name) {
+                    return standard.Elements("EnergyUse").SingleOrDefault(x => x.Element("Name").Value == name);
+                }
+
+                double temp;
+
+                if (spaceCoolPath("EU-SpcClg")?.Value != null) {
+                    temp = Math.Round(Convert.ToDouble(spaceCoolPath("EU-SpcClg")?.Elements("PctImproveTDV").SingleOrDefault().Value), 1);
+                    return temp + "%";
+                }
+                else
+                {
+                    double lowestDirectionVal = 9999;
+
+                    List<double> directionValue = new List<double>();
+                    directionValue.Add(Convert.ToDouble(spaceCoolPath("N-EU-SpcClg")?.Elements("PctImproveTDV").SingleOrDefault().Value));
+                    directionValue.Add(Convert.ToDouble(spaceCoolPath("S-EU-SpcClg")?.Elements("PctImproveTDV").SingleOrDefault().Value));
+                    directionValue.Add(Convert.ToDouble(spaceCoolPath("E-EU-SpcClg")?.Elements("PctImproveTDV").SingleOrDefault().Value));
+                    directionValue.Add(Convert.ToDouble(spaceCoolPath("W-EU-SpcClg")?.Elements("PctImproveTDV").SingleOrDefault().Value));
+
+                    foreach (var item in directionValue)
+                    {
+
+                        Console.WriteLine("item: " + item);
+
+                        if( lowestDirectionVal > item )
+                        {
+                            lowestDirectionVal = item;
+                        }
+                    }
+                    Console.WriteLine(lowestDirectionVal);
+                    lowestDirectionVal = Math.Round(lowestDirectionVal, 1);
+                    Console.WriteLine(lowestDirectionVal);
+
+                    return lowestDirectionVal + "%";
+                }
+            }
 
             /*********************** ATTIC ***********************/
 
@@ -120,7 +160,7 @@ namespace DatasheetGenerator
 
 
             string _roofMatFormated;
-            string _radientBarrier = "N/A";
+            string _radientBarrier = "-";
             string _abvRoofDeck = "";
             string _blwRoofDeck = "";
             string _atticFloor = "";
@@ -478,7 +518,7 @@ namespace DatasheetGenerator
 
 
             WALLTYPE = _sidingOrStucco;
-
+            Console.WriteLine("Space cool func " + getSpaceCoolVal());
 
             PHOTO = (property.photovoltaic == "0") ? "N/A" : (property.photovoltaic.Length == 1) ? property.photovoltaic + ".00 kWdc" : property.photovoltaic + " kWdc";
             HERS = "N/A";
@@ -486,7 +526,7 @@ namespace DatasheetGenerator
             FILENAME = property.fileName;
             SQFT = property.squareFeet;
             ABVP = _aboveCodePerc;
-            COOLP = _spaceCool;
+            COOLP = getSpaceCoolVal();
             STORIES = property.stories;
             GLAZINGP = (property.glazing == 0) ? "0.00%" : property.glazing.ToString().Split('.')?[1]?.Insert(2, ".") + "%";
             ROOFMAT = _roofMatFormated;
@@ -521,7 +561,7 @@ namespace DatasheetGenerator
             UEF = _waterHeater;
             DISTRIBUTION = property.distribution;
 
-
+            Console.WriteLine("CoolP " + COOLP);
 
             currentColumnValuesArr = new List<string> {
                 PHOTO, HERS, PLANNAME, FILENAME, SQFT, ABVP, COOLP, STORIES, GLAZINGP, ROOFMAT, REFEM, ATTIC, ABVRD, BLWRD,
