@@ -2349,7 +2349,15 @@ e9+691737r3Xvfuvde9+691//9k=</pkg:binaryData>
                 if (FullXml != null)
                 {
                     Datasheet.LoadXml(FullXml);
-                    Datasheet.Save(@"C:\Users\" + Environment.UserName + @"\Downloads\" + HeaderGenerator.PROJECTNAME + " - Datasheet.doc");
+
+                    try
+                    {
+                        Datasheet.Save(@"C:\Users\" + Environment.UserName + @"\Downloads\" + HeaderGenerator.PROJECTNAME + " - Datasheet.doc");
+                    }
+                    catch (Exception)
+                    {
+                        MainWindow.AppWindow.ErrorBannerUpdater("Document open in another window, Please close it and try again.");
+                    }
                 }
                 else
                 {

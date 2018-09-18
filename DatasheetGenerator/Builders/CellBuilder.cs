@@ -23,7 +23,7 @@ namespace DatasheetGenerator
                 //Sets the key for each row
                 MainContentCellsToString += columnKeys[i];
                 
-                //Foreach Row[i] append each Column[currentColumn] -- Left to Right Then Top to Bottom -- allColumnsArr[currentColumn][i]
+                //Foreach Row[i] append each Column[currentColumn] -- Left to Right Then Top to Bottom -- AllColumnsArr[currentColumn][i]
                 while (currentColumn < allColumnsArr.Count)
                 {
                     if(new[] { 2,8,19,23,27,36,39}.Contains(i))

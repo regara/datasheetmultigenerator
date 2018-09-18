@@ -18,22 +18,21 @@ namespace DatasheetGenerator
         public string MainContent { get; set; }
         public string Windows { get; set; }
 
-        public string documentBuilder { get; set; }
+        public string DocumentBuilder { get; set; }
 
         // [[str1,str2,str3],[str1,str2,str3],[str1,str2,str3],ect...]
-        public List<List<string>> allColumnsArr { get; set; } = new List<List<string>>();
+        public List<List<string>> AllColumnsArr { get; set; } = new List<List<string>>();
 
 
-        public int deletedColumnCount { get; set; } = 0;
+        public int DeletedColumnCount { get; set; } = 0;
 
-        
-
-
+        public static MainWindow AppWindow;
 
         public MainWindow()
         {
             InitializeComponent();
             AddHandler(MouseRightButtonDownEvent, new MouseButtonEventHandler(DeleteColumnPrompt), true);
+            AppWindow = this;
         }
 
         private void WPFColumnUpdater(List<string> currentColumnArr)
@@ -50,7 +49,7 @@ namespace DatasheetGenerator
             tb.BorderThickness = new Thickness(3, 3, 3, 3);
             tb.Padding = new Thickness(10, 0, 10, 0);
             tb.TextWrapping = TextWrapping.Wrap;
-            tb.Text = "option" + Convert.ToString(Container.Children.Count + deletedColumnCount) + "\n";
+            tb.Text = "option" + Convert.ToString(Container.Children.Count + DeletedColumnCount) + "\n";
             Container.Children.Add(tb);
 
             tb.BorderBrush = new SolidColorBrush(Colors.Black);
@@ -66,15 +65,24 @@ namespace DatasheetGenerator
 
         private void UploadXMLClicked(object sender, RoutedEventArgs e)
         {
-            ErrorBanner.Text = "";
-
+            ErrorBannerUpdater("");
             //uploads an xml file
             foreach (var doc in new UploadXML().doc)
             {
+
                 //generates the header only once
-                if ((Count - deletedColumnCount) < 1)
+                if ((Count - DeletedColumnCount) < 1)
                 {
-                    Header = new HeaderGenerator(doc).HeaderToString;
+                    try
+                    {
+                        Header = new HeaderGenerator(doc).HeaderToString;
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine(exception);
+                        ErrorBannerUpdater("Did you upload the CBECC XML? The takeoff XML is invalid!");
+                        return;
+                    }
                 }
 
                 
@@ -92,7 +100,7 @@ namespace DatasheetGenerator
                         .Split(new [] { "<ModelFile>" }, StringSplitOptions.None)[1]
                         .Split(new [] { "</ModelFile>" }, StringSplitOptions.None)[0];
 
-                    ErrorBanner.Text += $"Cannot Upload File {corruptedFileName}, Please send it to IT. ";
+                    ErrorBannerUpdater($"Cannot Upload File {corruptedFileName}, Please send it to IT. ");
                     Console.WriteLine("Invalid XML --- " + exception);
                     continue;
                 }
@@ -100,17 +108,17 @@ namespace DatasheetGenerator
 
 
                 //Adds current xml to an array containing all of them [currentColumnArr][Values]
-                allColumnsArr.Add(currentColumnArr);
+                AllColumnsArr.Add(currentColumnArr);
 
                 //WPF App - Adds a column as xml uploaded for visual representation
                 WPFColumnUpdater(currentColumnArr);
                 //this.Count++
                 Count++;
 
-                if ((Count - deletedColumnCount) >= 10)
+                if ((Count - DeletedColumnCount) >= 10)
                 {
                     Console.WriteLine("Limit reached - " + Count);
-                    ErrorBanner.Text += "Limit reached (10) - Will increase to 15 in the future";
+                    ErrorBannerUpdater("Limit reached (10) - Will increase to 15 in the future");
 
                     Upload.IsEnabled = false;
 
@@ -121,22 +129,23 @@ namespace DatasheetGenerator
         
         private void GenerateDatasheet(object sender, RoutedEventArgs e)
         {
-            ErrorBanner.Text = "";
+            ErrorBannerUpdater("");
             if (Count < 1)
             {
-                ErrorBanner.Text = "Nothing To Generate";
+                ErrorBannerUpdater("Nothing To Generate");
                 return;
             }
 
 
-            var MainContent = new CellBuilder(allColumnsArr).MainContentCellsToString;
+            var MainContent = new CellBuilder(AllColumnsArr).MainContentCellsToString;
             var Windows = new WindowBuilder(CurrentColumnValues.windowArray).windowBuild;
 
             Console.WriteLine("Window Initialized");
 
             try
             {
-                documentBuilder = new DocumentBuilder(Header, MainContent, Windows).FullXml;
+                Console.WriteLine("try build");
+                DocumentBuilder = new DocumentBuilder(Header, MainContent, Windows).FullXml;
 
                 Console.WriteLine(@"Document Built");
 
@@ -151,7 +160,7 @@ namespace DatasheetGenerator
 
                     using (TextWriter tw = new StreamWriter(path))
                     {
-                        tw.WriteLine(documentBuilder);
+                        tw.WriteLine(DocumentBuilder);
                     }
 
                 }*/
@@ -166,7 +175,7 @@ namespace DatasheetGenerator
             }
             catch (Exception exception)
             {
-                ErrorBanner.Text = "Something went wrong, Please send the xml files to to IT.";
+                ErrorBannerUpdater("Something went wrong, Please send the xml files to to IT.");
                 Console.WriteLine("Unexpected Error --- Generated DataSheet clicked --- " + exception);
                 throw;
             }
@@ -178,7 +187,7 @@ namespace DatasheetGenerator
 
         private void DeleteColumnPrompt(object sender, MouseButtonEventArgs e)
         {
-            ErrorBanner.Text = "";
+            ErrorBannerUpdater("");
             try
             {
                 string[] SourceSplitTypexName = e.Source.ToString().Split(':');
@@ -205,15 +214,15 @@ namespace DatasheetGenerator
                                 if (MessageBox.Show("Do you want to delete " + selectedName, "Delete Option Prompt", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                                 {
                                     Container.Children.RemoveAt(i);
-                                    allColumnsArr.RemoveAt(i);
-                                    deletedColumnCount++;
+                                    AllColumnsArr.RemoveAt(i);
+                                    DeletedColumnCount++;
                                 }
                                 break;
                             }
                         }
                     }
 
-                    if ((Count - deletedColumnCount) < 10)
+                    if ((Count - DeletedColumnCount) < 10)
                     {
                         Upload.IsEnabled = true;
                     }
@@ -222,7 +231,7 @@ namespace DatasheetGenerator
             catch (Exception exception)
             {
                 Console.WriteLine("Unexpected Error --- " + exception);
-                ErrorBanner.Text = "Cannot Delete, if reproduceable please send xml and reproduction steps to IT.";
+                ErrorBannerUpdater("Cannot Delete, if reproduceable please send xml and reproduction steps to IT.");
             }
             
         }
@@ -233,10 +242,10 @@ namespace DatasheetGenerator
 
             if (temp == MessageBoxResult.Yes)
             {
-                //                allColumnsArr = new List<List<string>>();
+                //                AllColumnsArr = new List<List<string>>();
                 //                CurrentColumnValues.windowArray = new List<List<string>>();
                 //                Count = 0;
-                //                deletedColumnCount = 0;
+                //                DeletedColumnCount = 0;
                 //
                 //                Container.Children.Clear();
                 //                Upload.IsEnabled = true;
@@ -244,6 +253,11 @@ namespace DatasheetGenerator
                 System.Windows.Forms.Application.Restart();
                 System.Windows.Application.Current.Shutdown();
             }
+        }
+
+        public void ErrorBannerUpdater(string errorMessage) {
+            ErrorBanner.Text = errorMessage;
+            
         }
     }
 }

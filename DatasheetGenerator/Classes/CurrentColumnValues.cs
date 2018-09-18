@@ -237,9 +237,12 @@ namespace DatasheetGenerator
 
             foreach (var atticFloor in userInput.Elements("Zone").Elements("CeilingBelowAttic"))
             {
-                var temp = atticFloor.Element("Construction");
-                if (!atticFloorArr.Contains(temp.Value.Split(' ')[0]) && temp.Value != "R-19 Attic Roof")
-                    atticFloorArr.Add(temp.Value.Split(' ')[0]);
+                if (!atticFloor.Element("Name").ToString().Contains("FAU")) {
+                    var temp = atticFloor.Element("Construction");
+
+                    if (!atticFloorArr.Contains(temp.Value.Split(' ')[0]))
+                        atticFloorArr.Add(temp.Value.Split(' ')[0]);
+                }
             }
 
 
@@ -306,8 +309,19 @@ namespace DatasheetGenerator
 
                         void WallFormater(string wallPathVal)
                         {
+
+                           
+
                             string firstWordInString = wallPathVal.Split(' ')[0];
                             string rVal = Regex.Split(firstWordInString, @"\D+")[1];
+                            string wallValue = "";
+
+                            if (wallPathVal.Contains("w/1 Foam Wall")) {
+                                wallValue = firstWordInString + "+ R-4";
+                            } else {
+                                wallValue = firstWordInString; ;
+                            }
+
 
                             if (firstWordInString == "existing" || firstWordInString == "Wall")
                             {
@@ -319,12 +333,12 @@ namespace DatasheetGenerator
                                 if (_wallInsul24.Length == 1)
                                     _wallInsul24 = "";
 
-                                if (!_wallInsul24.Contains(firstWordInString))
+                                if (!_wallInsul24.Contains(wallValue))
                                 {
                                     if (_wallInsul24.Length > 1)
                                         _wallInsul24 += " / ";
 
-                                    _wallInsul24 += firstWordInString;
+                                    _wallInsul24 += wallValue;
                                     if (wall.Element("Construction").Value.Split(' ').Last().Contains("R"))
                                         _wallInsul24 += " + " + wall.Element("Construction").Value.Split(' ').Last().Split('-')[1];
                                 }
@@ -334,12 +348,12 @@ namespace DatasheetGenerator
                                 if (_wallInsul26.Length == 1)
                                     _wallInsul26 = "";
 
-                                if (!_wallInsul26.Contains(firstWordInString))
+                                if (!_wallInsul26.Contains(wallValue))
                                 {
                                     if (_wallInsul26.Length > 1)
                                         _wallInsul26 += " / ";
 
-                                    _wallInsul26 += firstWordInString;
+                                    _wallInsul26 += wallValue;
                                     if (wall.Element("Construction").Value.Split(' ').Last().Contains("R"))
                                         _wallInsul26 += " + " + wall.Element("Construction").Value.Split(' ').Last().Split('-')[1];
                                 }
@@ -350,7 +364,7 @@ namespace DatasheetGenerator
 
                     foreach (var wallI in zone.Elements("IntWall"))
                     {
-                        if (!kneeWallArr.Contains(wallI.Element("Construction").Value.Split(' ')[0]))
+                        if (!kneeWallArr.Contains(wallI.Element("Construction").Value.Split(' ')[0]) && wallI.Element("Outside").Value != "Garage")
                             kneeWallArr.Add(wallI.Element("Construction").Value.Split(' ')[0]);
                     }
 
@@ -374,10 +388,10 @@ namespace DatasheetGenerator
                     switch (tempPath)
                     {
                         case "Synthetic Stucco":
-                            _sidingOrStucco += "Synthetic";
+                            _sidingOrStucco += "1-Coat Stucco";
                             break;
                         case "3 Coat Stucco":
-                            _sidingOrStucco += "3-Coat";
+                            _sidingOrStucco += "3-Coat Stucco";
                             break;
                         case "Wood Siding/sheathing/decking":
                             _sidingOrStucco += "Siding/Sheathing";
@@ -518,8 +532,6 @@ namespace DatasheetGenerator
 
 
             WALLTYPE = _sidingOrStucco;
-            Console.WriteLine("Space cool func " + getSpaceCoolVal());
-
             PHOTO = (property.photovoltaic == "0") ? "N/A" : (property.photovoltaic.Length == 1) ? property.photovoltaic + ".00 kWdc" : property.photovoltaic + " kWdc";
             HERS = "N/A";
             PLANNAME = _name;
@@ -551,7 +563,7 @@ namespace DatasheetGenerator
             REFCHARGE = (property.refCharg == "1") ? "Yes" : "-";
             SEERVERIF = (property.seerVerif == "1") ? "Yes" : "-";
             EERVERIF = (property.eerVerif == "1") ? "Yes" : "-";
-            INFILTRATION = (Convert.ToInt32(_airLeakage.Split('.')[0]) >= 5) ? "-" : "Yes (" + _airLeakage + ")";
+            INFILTRATION = (Convert.ToInt32(_airLeakage.Split('.')[0]) >= 5) ? "-" : "Yes (" + proposed.Elements("CFM50").SingleOrDefault()?.Value + ")";
             DUCTCOND = _ductInConditioned;
             LOWLEAK = (property.lowLeakageAir == "Has Low Leakage Air Handler") ? "Yes" : "-";
             BURRIEDDUCT = _buriedDuct;
@@ -560,8 +572,6 @@ namespace DatasheetGenerator
             FUELTYPE = property.fuelType;
             UEF = _waterHeater;
             DISTRIBUTION = property.distribution;
-
-            Console.WriteLine("CoolP " + COOLP);
 
             currentColumnValuesArr = new List<string> {
                 PHOTO, HERS, PLANNAME, FILENAME, SQFT, ABVP, COOLP, STORIES, GLAZINGP, ROOFMAT, REFEM, ATTIC, ABVRD, BLWRD,
