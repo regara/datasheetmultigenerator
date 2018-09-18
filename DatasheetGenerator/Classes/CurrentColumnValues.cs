@@ -497,7 +497,7 @@ namespace DatasheetGenerator
 
             _wholeHouseFan = string.Join("+", _wholeHouseFan.Split('+').Distinct().OrderByDescending(x => x));
 
-            _wholeHouseFan = "Yes ( " + _wholeHouseFan + ")";
+            _wholeHouseFan = "Yes (" + _wholeHouseFan + ")";
             if (_wholeHouseFan == "Yes ( )")
                 _wholeHouseFan = "-";
 
