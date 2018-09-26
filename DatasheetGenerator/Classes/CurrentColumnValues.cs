@@ -228,8 +228,15 @@ namespace DatasheetGenerator
                         _waterHeater += " + ";
 
                     waterHeaterArr.Add(temp);
-                    if (temp2.Element("EnergyFactor")?.Value.Split('.').ToList().ElementAt(1)?.Length == 1)
-                        temp2.Element("EnergyFactor").Value += "0";
+
+
+                    Console.WriteLine("Value ---> " + temp2.Element("EnergyFactor").Value);
+                    if (temp2.Element("EnergyFactor").Value.Contains("."))
+                    {
+                        Console.WriteLine("Contains .");
+                        if (temp2.Element("EnergyFactor")?.Value.Split('.').ToList().ElementAt(1)?.Length == 1)
+                            temp2.Element("EnergyFactor").Value += "0"; Console.WriteLine("Split");
+                    }
                     _waterHeater += temp2.Element("EnergyFactor")?.Value + "(" + temp2.Element("TankVolume")?.Value + ") ";
                 }
             }
@@ -364,6 +371,7 @@ namespace DatasheetGenerator
 
                     foreach (var wallI in zone.Elements("IntWall"))
                     {
+                        Console.WriteLine("Knee Wall - " + wallI.Element("Construction").Value);
                         if (!kneeWallArr.Contains(wallI.Element("Construction").Value.Split(' ')[0]) && wallI.Element("Outside").Value != "Garage")
                             kneeWallArr.Add(wallI.Element("Construction").Value.Split(' ')[0]);
                     }
@@ -426,7 +434,10 @@ namespace DatasheetGenerator
 
             _roofMatFormated = joinedBySlash(wallMatArr);
             _atticFloor = joinedBySlash(atticFloorArr);
-            _kneeWall = joinedBySlash(kneeWallArr);
+
+            Console.WriteLine(_kneeWall.Length);
+
+            _kneeWall = (kneeWallArr.Count == 0) ? "-" : joinedBySlash(kneeWallArr);
             _floorOvrGar = joinedBySlash(floorOvrGarArr);
 
             _wallInsul24 = string.Join(" / ", _wallInsul24.Split('/').Distinct().OrderBy(x => x));
