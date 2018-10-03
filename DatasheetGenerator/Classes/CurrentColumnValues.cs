@@ -68,6 +68,12 @@ namespace DatasheetGenerator
 
         };
 
+        public static List<List<string>> AllWindowsNoFilterArr { get; set; } = new List<List<string>>
+        {
+            new List<string>( ),
+            new List<string>( ),
+            new List<string>( ),
+        };
         
 
         public List<bool> WindowExists { get; set; } = new List<bool> {false,false,false};
@@ -130,17 +136,12 @@ namespace DatasheetGenerator
                     foreach (var item in directionValue)
                     {
 
-                        Console.WriteLine("item: " + item);
-
                         if( lowestDirectionVal > item )
                         {
                             lowestDirectionVal = item;
                         }
                     }
-                    Console.WriteLine(lowestDirectionVal);
                     lowestDirectionVal = Math.Round(lowestDirectionVal, 1);
-                    Console.WriteLine(lowestDirectionVal);
-
                     return lowestDirectionVal + "%";
                 }
             }
@@ -217,28 +218,24 @@ namespace DatasheetGenerator
                 }
             }
 
-            foreach (var waterHeater in doc.Descendants("Model").Take(1).Elements("DHWSys"))
+
+
+            List<string> DHWHeaterUEF = new List<string>();
+            List<string> DHWHeaterSize = new List<string>();
+
+            foreach (var DHWHeater in doc.Descendants("Model").Take(1).Elements("DHWHeater"))
             {
-                var temp = waterHeater.Element("DHWHeater")?.Value;
-                var temp2 = doc.Descendants("Model").Take(1).Elements("DHWHeater").SingleOrDefault(x => x.Element("Name")?.Value == temp);
-
-                if (!waterHeaterArr.Contains(temp))
-                {
-                    if (waterHeaterArr.Count > 0)
-                        _waterHeater += " + ";
-
-                    waterHeaterArr.Add(temp);
+                Console.WriteLine("Heater = " + DHWHeater);
+                DHWHeaterUEF.Add(DHWHeater.Element("RecovEff").Value);
+                DHWHeaterSize.Add(DHWHeater.Element("TankVolume").Value);
+            }
 
 
-                    Console.WriteLine("Value ---> " + temp2.Element("EnergyFactor").Value);
-                    if (temp2.Element("EnergyFactor").Value.Contains("."))
-                    {
-                        Console.WriteLine("Contains .");
-                        if (temp2.Element("EnergyFactor")?.Value.Split('.').ToList().ElementAt(1)?.Length == 1)
-                            temp2.Element("EnergyFactor").Value += "0"; Console.WriteLine("Split");
-                    }
-                    _waterHeater += temp2.Element("EnergyFactor")?.Value + "(" + temp2.Element("TankVolume")?.Value + ") ";
-                }
+            for (int i = 0; i < DHWHeaterUEF.Count; i++)
+            {
+                if (i > 0)
+                    _waterHeater += " + ";
+                _waterHeater += "0." + DHWHeaterUEF[i] + "(" + DHWHeaterSize[i] + ") ";
             }
 
 
@@ -371,7 +368,6 @@ namespace DatasheetGenerator
 
                     foreach (var wallI in zone.Elements("IntWall"))
                     {
-                        Console.WriteLine("Knee Wall - " + wallI.Element("Construction").Value);
                         if (!kneeWallArr.Contains(wallI.Element("Construction").Value.Split(' ')[0]) && wallI.Element("Outside").Value != "Garage")
                             kneeWallArr.Add(wallI.Element("Construction").Value.Split(' ')[0]);
                     }
@@ -419,13 +415,13 @@ namespace DatasheetGenerator
                     if (!tempArr.Contains(e)) tempArr.Add(e);
                 });
                 
-                return String.Join(" / ", tempArr);
+                return string.Join(" / ", tempArr);
             }
 
             if (abvDeckArr.Count == 0)
                 _abvRoofDeck = "-";
             else
-                _abvRoofDeck = String.Join(" / ", abvDeckArr);
+                _abvRoofDeck = string.Join(" / ", abvDeckArr);
 
             if (blwDeckArr.Count == 0)
                 _blwRoofDeck = "-";
@@ -435,7 +431,6 @@ namespace DatasheetGenerator
             _roofMatFormated = joinedBySlash(wallMatArr);
             _atticFloor = joinedBySlash(atticFloorArr);
 
-            Console.WriteLine(_kneeWall.Length);
 
             _kneeWall = (kneeWallArr.Count == 0) ? "-" : joinedBySlash(kneeWallArr);
             _floorOvrGar = joinedBySlash(floorOvrGarArr);
@@ -506,11 +501,46 @@ namespace DatasheetGenerator
                     _wholeHouseFan += whf.Value;
             }
 
-            _wholeHouseFan = string.Join("+", _wholeHouseFan.Split('+').Distinct().OrderByDescending(x => x));
-
-            _wholeHouseFan = "Yes (" + _wholeHouseFan + ")";
-            if (_wholeHouseFan == "Yes ( )")
+            _wholeHouseFan = string.Join(" + ", _wholeHouseFan.Split('+').Distinct().OrderByDescending(x => x));
+       
+            if (_wholeHouseFan == "")
                 _wholeHouseFan = "-";
+            else
+                _wholeHouseFan = "Yes (" + _wholeHouseFan + ")";
+
+
+
+
+
+
+
+            List<string> _afue = new List<string>();
+            string seerEer = "";
+
+
+            foreach (var SCSysRpt in proposed.Elements("SCSysRpt"))
+            {
+                _afue.Add(SCSysRpt?.Element("MinHeatEffic")?.Value);
+                if (seerEer != "")
+                    seerEer += " &amp; ";
+                seerEer += (SCSysRpt.Element("MinCoolSEER")?.Value != null) ? SCSysRpt.Element("MinCoolSEER")?.Value + " / " + SCSysRpt.Element("MinCoolEER")?.Value : "-";
+            }
+
+
+            string afue = string.Join(" &amp; ", _afue);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             var property = (from p in doc.Descendants("Model").Where(n => (string)n.Attribute("Name") == "Proposed")
                             let proj = p.Element("Proj")
@@ -523,8 +553,6 @@ namespace DatasheetGenerator
                                 stories = proj.Element("NumStories").Value,
                                 glazing = Math.Round(Convert.ToDouble(proj.Element("CondWinAreaCFARat").Value), 3),
                                 reflectEmiss = proj.Elements("Attic")?.FirstOrDefault()?.Element("RoofSolReflect").Value + " / " + proj.Elements("Attic")?.FirstOrDefault()?.Element("RoofEmiss").Value,
-                                seerEer = (proj.Element("SCSysRpt")?.Element("MinCoolSEER")?.Value != null) ? proj.Element("SCSysRpt")?.Element("MinCoolSEER")?.Value + " / " + proj.Element("SCSysRpt")?.Element("MinCoolEER")?.Value : "-",
-                                afue = proj.Element("SCSysRpt")?.Element("MinHeatEffic")?.Value,
                                 ductInsul = proj.Element("SCSysRpt")?.Element("MinDistribInsRval")?.Value,
                                 fanWattage = proj.Element("SCSysRpt")?.Element("HERSFanEff")?.Value,
                                 airflow = proj.Element("SCSysRpt")?.Element("HERSAHUAirFlow")?.Value,
@@ -563,8 +591,8 @@ namespace DatasheetGenerator
             KNEEWALL = _kneeWall;
             OVERG = (_floorOvrGar != "") ? _floorOvrGar : "-";
             FLOORTYPE = _floorType;
-            SEEREER = property.seerEer;
-            AFUE = (property.afue != null ) ? property.afue : "-";
+            SEEREER = seerEer;
+            AFUE = afue ?? "-";
             DUCTINS = (property.ductInsul != null ) ? "R-" + property.ductInsul : "-";
             WHF = _wholeHouseFan;
             FANWAT = (property.fanWattage == "1") ? "Yes" : "-";

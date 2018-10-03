@@ -2304,7 +2304,6 @@ e9+691737r3Xvfuvde9+691//9k=</pkg:binaryData>
 
             if (Count <= 10)
             {
-                Console.WriteLine("Count === " + Count);
                 FullXml = FullXml.Replace("pageWidth", pageWidthArr[Count -1].ToString());
                 FullXml = FullXml.Replace("keyWidth", keyWidthArr[Count - 1].ToString());
                 FullXml = FullXml.Replace("columnWidth", colWdithArr[Count - 1].ToString());
@@ -2349,7 +2348,6 @@ e9+691737r3Xvfuvde9+691//9k=</pkg:binaryData>
                 if (FullXml != null)
                 {
                     Datasheet.LoadXml(FullXml);
-
                     try
                     {
                         Datasheet.Save(@"C:\Users\" + Environment.UserName + @"\Downloads\" + HeaderGenerator.PROJECTNAME + " - Datasheet.doc");

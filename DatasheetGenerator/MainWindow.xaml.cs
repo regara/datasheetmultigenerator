@@ -34,7 +34,7 @@ namespace DatasheetGenerator
             AddHandler(MouseRightButtonDownEvent, new MouseButtonEventHandler(DeleteColumnPrompt), true);
             AppWindow = this;
         }
-
+        
         private void WPFColumnUpdater(List<string> currentColumnArr)
         {
 
@@ -187,6 +187,16 @@ namespace DatasheetGenerator
 
         private void DeleteColumnPrompt(object sender, MouseButtonEventArgs e)
         {
+
+
+
+
+
+
+
+
+
+
             ErrorBannerUpdater("");
             try
             {
@@ -216,6 +226,10 @@ namespace DatasheetGenerator
                                     Container.Children.RemoveAt(i);
                                     AllColumnsArr.RemoveAt(i);
                                     DeletedColumnCount++;
+
+                                    CurrentColumnValues.windowArray[0].RemoveAt(i + 1);
+                                    CurrentColumnValues.windowArray[1].RemoveAt(i + 1);
+                                    CurrentColumnValues.windowArray[2].RemoveAt(i + 1);
                                 }
                                 break;
                             }

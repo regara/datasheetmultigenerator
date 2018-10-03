@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace DatasheetGenerator
 {
+    [System.Runtime.InteropServices.Guid("39CC3CDE-310D-44CF-8913-11E6F1B40C85")]
     public class WindowBuilder
     {
         public string Windows { get; set; }
@@ -105,11 +106,11 @@ namespace DatasheetGenerator
                                 {
                                     e.RemoveAt(t);
                                 }
-
                             }
                         }
                         catch
                         {
+                            Console.WriteLine("Window Array: Something went wrong?? (nonbreaking)");
                             //Temp Patch
                         }
                        
@@ -142,7 +143,7 @@ namespace DatasheetGenerator
                 });
             }
 
-            //Itterate for Column height; foreach row only get 1 index [i] merg them together.
+            //Itterate for Column height; foreach row only get 1 index [i] merge them together.
 
             for (var i = 0; i < largestArrCount; i++)
             {
