@@ -164,8 +164,6 @@ namespace DatasheetGenerator
 
                 }
                 windowBuild += "</w:tr>";
-                Console.WriteLine("/TR ended");
-
 
 
 

@@ -225,7 +225,6 @@ namespace DatasheetGenerator
 
             foreach (var DHWHeater in doc.Descendants("Model").Take(1).Elements("DHWHeater"))
             {
-                Console.WriteLine("Heater = " + DHWHeater);
                 DHWHeaterUEF.Add(DHWHeater.Element("RecovEff").Value);
                 DHWHeaterSize.Add(DHWHeater.Element("TankVolume").Value);
             }
