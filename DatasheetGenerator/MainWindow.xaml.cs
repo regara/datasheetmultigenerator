@@ -71,7 +71,7 @@ namespace DatasheetGenerator
             {
 
                 //generates the header only once
-                if ((Count - DeletedColumnCount) < 1)
+                if (Count - DeletedColumnCount < 1)
                 {
                     try
                     {
@@ -115,7 +115,7 @@ namespace DatasheetGenerator
                 //this.Count++
                 Count++;
 
-                if ((Count - DeletedColumnCount) >= 10)
+                if (Count - DeletedColumnCount >= 10)
                 {
                     Console.WriteLine("Limit reached - " + Count);
                     ErrorBannerUpdater("Limit reached (10) - Will increase to 15 in the future");
@@ -236,7 +236,7 @@ namespace DatasheetGenerator
                         }
                     }
 
-                    if ((Count - DeletedColumnCount) < 10)
+                    if (Count - DeletedColumnCount < 10)
                     {
                         Upload.IsEnabled = true;
                     }

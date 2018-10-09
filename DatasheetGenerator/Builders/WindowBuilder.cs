@@ -136,7 +136,7 @@ namespace DatasheetGenerator
                         {
                             while (e.Count < largestArrCount)
                             {
-                                e.Insert((e.Count), "");
+                                e.Insert(e.Count, "");
                             }
                         }
                     }                    
@@ -153,13 +153,13 @@ namespace DatasheetGenerator
                 {
                     windowBuild += windowCellBuilder(
                         windowArrays[a][i],
-                        (a == 4),
-                        (a == 1 || a == 2),
+                        a == 4,
+                        a == 1 || a == 2,
                         false,
                         WindowCellWidthArr[a],
-                        (a == 1 && i == 0) || (a == 2 && i == 0),
-                        (a == 1 && i == 0) || (a == 2 && i == 0),
-                        (a == 0 && i != 0)
+                        a == 1 && i == 0 || a == 2 && i == 0,
+                        a == 1 && i == 0 || a == 2 && i == 0,
+                        a == 0 && i != 0
                     );
 
                 }

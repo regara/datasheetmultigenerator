@@ -168,12 +168,12 @@ namespace DatasheetGenerator
             string _wallInsul24 = "-";
             string _wallInsul26 = "-";
             string _kneeWall = "-";
-            string _floorOvrGar = "-";
+            string _floorOvrGar;
             string _floorType = "";
             string _sidingOrStucco = "";
             string _indoorAirQual = doc.Descendants("Model").Skip(1).Take(1).Elements("IAQVentRpt").SingleOrDefault()?.Element("IAQCFM")?.Value;
             string _insulConsQual = userInput.Elements("InsulConsQuality").SingleOrDefault()?.Value;
-            string _airLeakage = (userInput.Elements("ACH50").SingleOrDefault()?.Value.Length == 1) ? userInput.Elements("ACH50").SingleOrDefault()?.Value + ".00%" : userInput.Elements("ACH50").SingleOrDefault()?.Value + "%";
+            string _airLeakage = userInput.Elements("ACH50").SingleOrDefault()?.Value.Length == 1 ? userInput.Elements("ACH50").SingleOrDefault()?.Value + ".00%" : userInput.Elements("ACH50").SingleOrDefault()?.Value + "%";
             string _buriedDuct = "-";
             string _surfaceArea = "-";
             string _ductInConditioned = "-";
@@ -225,7 +225,11 @@ namespace DatasheetGenerator
 
             foreach (var DHWHeater in doc.Descendants("Model").Take(1).Elements("DHWHeater"))
             {
-                DHWHeaterUEF.Add(DHWHeater.Element("RecovEff").Value);
+                if (DHWHeater.Element("EnergyFactor").Value.Split('.')[1].Length > 1)
+                {
+                    DHWHeaterUEF.Add(DHWHeater.Element("EnergyFactor").Value);
+                }
+                else DHWHeaterUEF.Add(DHWHeater.Element("EnergyFactor").Value + "0");
                 DHWHeaterSize.Add(DHWHeater.Element("TankVolume").Value);
             }
 
@@ -234,7 +238,7 @@ namespace DatasheetGenerator
             {
                 if (i > 0)
                     _waterHeater += " + ";
-                _waterHeater += "0." + DHWHeaterUEF[i] + "(" + DHWHeaterSize[i] + ") ";
+                _waterHeater += DHWHeaterUEF[i] + "(" + DHWHeaterSize[i] + ") ";
             }
 
 
@@ -293,9 +297,8 @@ namespace DatasheetGenerator
                 if (radientBarrierPath == "1")
                     _radientBarrier = "Yes";
 
-                if (!abvDeckArr.Contains(aboveRoofDeckPath) && aboveRoofDeckPath != "- no insulation -")
-                    abvDeckArr.Add(aboveRoofDeckPath);
-
+                if (!abvDeckArr.Contains(aboveRoofDeckPath.Split(' ')[0]) && aboveRoofDeckPath != "- no insulation -")
+                    abvDeckArr.Add(aboveRoofDeckPath.Split(' ')[0]);
 
 
                 if (!blwDeckArr.Contains(belowRoofDeckPath) && belowRoofDeckPath != "- no insulation -")
@@ -373,8 +376,10 @@ namespace DatasheetGenerator
 
                     foreach (var floor in zone.Elements("InteriorFloor"))
                     {
-                        if (!floorOvrGarArr.Contains(floor.Element("Construction").Value.Split(' ')[0]))
-                            floorOvrGarArr.Add(floor.Element("Construction").Value.Split(' ')[0]);
+                        string floorVal = floor.Element("Construction").Value.Split(' ')[0];
+
+                        if (!floorOvrGarArr.Contains(floorVal) && floorVal != "R-0")
+                                floorOvrGarArr.Add(floorVal);
                     }
                 }
             }
@@ -431,7 +436,7 @@ namespace DatasheetGenerator
             _atticFloor = joinedBySlash(atticFloorArr);
 
 
-            _kneeWall = (kneeWallArr.Count == 0) ? "-" : joinedBySlash(kneeWallArr);
+            _kneeWall = kneeWallArr.Count == 0 ? "-" : joinedBySlash(kneeWallArr);
             _floorOvrGar = joinedBySlash(floorOvrGarArr);
 
             _wallInsul24 = string.Join(" / ", _wallInsul24.Split('/').Distinct().OrderBy(x => x));
@@ -457,9 +462,9 @@ namespace DatasheetGenerator
                             if (!windowArray[0].Contains("Unknown Window"))
                             {
                                 Console.WriteLine("Unknown Window Found");
-                                windowArray[0].Add((windows?.Element("WinType")?.Value != null) ? windows?.Element("WinType")?.Value : "Unknown Window");
-                                windowArray[1].Add((windows?.Element("NFRCUfactor")?.Value != null) ? windows?.Element("NFRCUfactor")?.Value : "Unknown Value");
-                                windowArray[2].Add((windows?.Element("NFRCSHGC")?.Value != null) ? windows?.Element("NFRCSHGC")?.Value : "Unknown Value");
+                                windowArray[0].Add(windows?.Element("WinType")?.Value != null ? windows?.Element("WinType")?.Value : "Unknown Window");
+                                windowArray[1].Add(windows?.Element("NFRCUfactor")?.Value != null ? windows?.Element("NFRCUfactor")?.Value : "Unknown Value");
+                                windowArray[2].Add(windows?.Element("NFRCSHGC")?.Value != null ? windows?.Element("NFRCSHGC")?.Value : "Unknown Value");
                             }
                         }
                         else {
@@ -522,7 +527,7 @@ namespace DatasheetGenerator
                 _afue.Add(SCSysRpt?.Element("MinHeatEffic")?.Value);
                 if (seerEer != "")
                     seerEer += " &amp; ";
-                seerEer += (SCSysRpt.Element("MinCoolSEER")?.Value != null) ? SCSysRpt.Element("MinCoolSEER")?.Value + " / " + SCSysRpt.Element("MinCoolEER")?.Value : "-";
+                seerEer += SCSysRpt.Element("MinCoolSEER")?.Value != null ? SCSysRpt.Element("MinCoolSEER")?.Value + " / " + SCSysRpt.Element("MinCoolEER")?.Value : "-";
             }
 
 
@@ -570,7 +575,7 @@ namespace DatasheetGenerator
 
 
             WALLTYPE = _sidingOrStucco;
-            PHOTO = (property.photovoltaic == "0") ? "N/A" : (property.photovoltaic.Length == 1) ? property.photovoltaic + ".00 kWdc" : property.photovoltaic + " kWdc";
+            PHOTO = property.photovoltaic == "0" ? "N/A" : property.photovoltaic.Length == 1 ? property.photovoltaic + ".00 kWdc" : property.photovoltaic + " kWdc";
             HERS = "N/A";
             PLANNAME = _name;
             FILENAME = property.fileName;
@@ -578,7 +583,7 @@ namespace DatasheetGenerator
             ABVP = _aboveCodePerc;
             COOLP = getSpaceCoolVal();
             STORIES = property.stories;
-            GLAZINGP = (property.glazing == 0) ? "0.00%" : property.glazing.ToString().Split('.')?[1]?.Insert(2, ".") + "%";
+            GLAZINGP = property.glazing == 0 ? "0.00%" : property.glazing.ToString().Split('.')?[1]?.Insert(2, ".") + "%";
             ROOFMAT = _roofMatFormated;
             REFEM = property.reflectEmiss;
             ATTIC = _atticFloor;
@@ -588,25 +593,25 @@ namespace DatasheetGenerator
             WALL24 = _wallInsul24;
             WALL26 = _wallInsul26;
             KNEEWALL = _kneeWall;
-            OVERG = (_floorOvrGar != "") ? _floorOvrGar : "-";
+            OVERG = _floorOvrGar != "" ? _floorOvrGar : "-";
             FLOORTYPE = _floorType;
             SEEREER = seerEer;
             AFUE = afue ?? "-";
-            DUCTINS = (property.ductInsul != null ) ? "R-" + property.ductInsul : "-";
+            DUCTINS = property.ductInsul != null ? "R-" + property.ductInsul : "-";
             WHF = _wholeHouseFan;
-            FANWAT = (property.fanWattage == "1") ? "Yes" : "-";
-            AIRFLOW = (property.airflow == "1") ? "Yes (" + property.airflowVal + ")" : "-";
-            DUCTTEST = (property.ductTestingReq == "1") ? "Yes (" + property.ductTestingVal + "%)" : "-";
-            CFM = (_indoorAirQual != "0") ? "Yes (" + _indoorAirQual + ")" : "-";
-            REFCHARGE = (property.refCharg == "1") ? "Yes" : "-";
-            SEERVERIF = (property.seerVerif == "1") ? "Yes" : "-";
-            EERVERIF = (property.eerVerif == "1") ? "Yes" : "-";
-            INFILTRATION = (Convert.ToInt32(_airLeakage.Split('.')[0]) >= 5) ? "-" : "Yes (" + proposed.Elements("CFM50").SingleOrDefault()?.Value + ")";
+            FANWAT = property.fanWattage == "1" ? "Yes" : "-";
+            AIRFLOW = property.airflow == "1" ? "Yes (" + property.airflowVal + ")" : "-";
+            DUCTTEST = property.ductTestingReq == "1" ? "Yes (" + property.ductTestingVal + "%)" : "-";
+            CFM = _indoorAirQual != "0" ? "Yes (" + _indoorAirQual + ")" : "-";
+            REFCHARGE = property.refCharg == "1" ? "Yes" : "-";
+            SEERVERIF = property.seerVerif == "1" ? "Yes" : "-";
+            EERVERIF = property.eerVerif == "1" ? "Yes" : "-";
+            INFILTRATION = Convert.ToInt32(_airLeakage.Split('.')[0]) >= 5 ? "-" : "Yes (" + proposed.Elements("CFM50").SingleOrDefault()?.Value + ")";
             DUCTCOND = _ductInConditioned;
-            LOWLEAK = (property.lowLeakageAir == "Has Low Leakage Air Handler") ? "Yes" : "-";
+            LOWLEAK = property.lowLeakageAir == "Has Low Leakage Air Handler" ? "Yes" : "-";
             BURRIEDDUCT = _buriedDuct;
             SURFAREA = _surfaceArea;
-            INSULINSPECT = (_Qii == "1") ? "Yes" : "-";
+            INSULINSPECT = _Qii == "1" ? "Yes" : "-";
             FUELTYPE = property.fuelType;
             UEF = _waterHeater;
             DISTRIBUTION = property.distribution;

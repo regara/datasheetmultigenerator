@@ -2279,7 +2279,7 @@ e9+691737r3Xvfuvde9+691//9k=</pkg:binaryData>
             //********** THIS IS THE MISSING AREA **********//
 
 
-            int keyWidth = (Count < 10) ? pageWidthArr[Count] : pageWidthArr[10];
+            int keyWidth = Count < 10 ? pageWidthArr[Count] : pageWidthArr[10];
 
             //This string is for the page width
             columns = @"<w:tbl>
@@ -2330,7 +2330,7 @@ e9+691737r3Xvfuvde9+691//9k=</pkg:binaryData>
                 FullXml = FullXml.Replace("<w:sz w:val='20'/>", "<w:sz w:val='18'/>");
 
             }
-            else if ((Count > 9))
+            else if (Count > 9)
             {
                 FullXml = FullXml.Replace("<w:sz w:val='20'/>", "<w:sz w:val='16'/>");
 
