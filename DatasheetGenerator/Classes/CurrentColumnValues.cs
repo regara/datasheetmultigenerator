@@ -68,12 +68,12 @@ namespace DatasheetGenerator
 
         };
 
-        public static List<List<string>> AllWindowsNoFilterArr { get; set; } = new List<List<string>>
-        {
-            new List<string>( ),
-            new List<string>( ),
-            new List<string>( ),
-        };
+//        public static List<List<string>> AllWindowsNoFilterArr { get; set; } = new List<List<string>>
+//        {
+//            new List<string>( ),
+//            new List<string>( ),
+//            new List<string>( ),
+//        };
         
 
         public List<bool> WindowExists { get; set; } = new List<bool> {false,false,false};

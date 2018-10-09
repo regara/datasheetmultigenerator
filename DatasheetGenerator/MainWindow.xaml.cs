@@ -24,7 +24,7 @@ namespace DatasheetGenerator
         public List<List<string>> AllColumnsArr { get; set; } = new List<List<string>>();
 
 
-        public int DeletedColumnCount { get; set; } = 0;
+        public static int DeletedColumnCount { get; set; } = 0;
 
         public static MainWindow AppWindow;
 
@@ -126,11 +126,11 @@ namespace DatasheetGenerator
                 }
             }
         }
-        
+
         private void GenerateDatasheet(object sender, RoutedEventArgs e)
         {
             ErrorBannerUpdater("");
-            if (Count < 1)
+            if (Count - DeletedColumnCount < 1)
             {
                 ErrorBannerUpdater("Nothing To Generate");
                 return;
@@ -227,9 +227,9 @@ namespace DatasheetGenerator
                                     AllColumnsArr.RemoveAt(i);
                                     DeletedColumnCount++;
 
-                                    CurrentColumnValues.windowArray[0].RemoveAt(i + 1);
-                                    CurrentColumnValues.windowArray[1].RemoveAt(i + 1);
-                                    CurrentColumnValues.windowArray[2].RemoveAt(i + 1);
+//                                    CurrentColumnValues.windowArray[0].RemoveAt(i + 1);
+//                                    CurrentColumnValues.windowArray[1].RemoveAt(i + 1);
+//                                    CurrentColumnValues.windowArray[2].RemoveAt(i + 1);
                                 }
                                 break;
                             }
@@ -247,7 +247,6 @@ namespace DatasheetGenerator
                 Console.WriteLine("Unexpected Error --- " + exception);
                 ErrorBannerUpdater("Cannot Delete, if reproduceable please send xml and reproduction steps to IT.");
             }
-            
         }
 
         private void ResetApplicationState(object sender, RoutedEventArgs e)

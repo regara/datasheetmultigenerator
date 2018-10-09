@@ -12,6 +12,8 @@ namespace DatasheetGenerator
         public string FullXml { get; set; }
 
         public int Count { get; set; } = MainWindow.Count;
+        public int DeletedCount { get; set; } = MainWindow.DeletedColumnCount;
+
         public XmlDocument Datasheet = new XmlDocument();
 
                 public static int[] colWdithArr =
@@ -2315,8 +2317,8 @@ e9+691737r3Xvfuvde9+691//9k=</pkg:binaryData>
                 FullXml = FullXml.Replace("pageWidth", pageWidthArr[10].ToString());
                 FullXml = FullXml.Replace("keyWidthPH", keyWidthArr[10].ToString());
                 FullXml = FullXml.Replace("columnWidth", colWdithArr[10].ToString());
-                FullXml = FullXml.Replace("KeyFontWeight", KeyFontWeight[Count - 1].ToString());
-                FullXml = FullXml.Replace("ColumnFontWeight", ColumnFontWeight[Count - 1].ToString());
+                FullXml = FullXml.Replace("KeyFontWeight", KeyFontWeight[Count - 1 - DeletedCount].ToString());
+                FullXml = FullXml.Replace("ColumnFontWeight", ColumnFontWeight[Count - 1 - DeletedCount].ToString());
 
                 
             }
